@@ -89,8 +89,6 @@ engly init
 
 Open your agent as usual. Your next prompt will be coached. 🎉
 
-Once Engly is on npm, installing will be a single command: `npm install -g engly`.
-
 ## 🤖 Supported agents
 
 | Agent | Where Engly adds its instructions | Status |
