@@ -5,6 +5,13 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-09-26
+
+### Added
+
+- `install.sh`: one-command install without cloning the repository, `curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | sh`. It checks for Node.js 22.12+, downloads the source tarball (no git needed), builds it in a temporary folder and installs the packed CLI globally with npm. `ENGLY_REF` picks a branch, tag or commit.
+- CI smoke test that runs `install.sh` against the pull request's own source.
+
 ## [1.0.0] - 2026-09-26
 
 First version: project foundation and `engly init` for Claude Code.
@@ -28,4 +35,5 @@ First version: project foundation and `engly init` for Claude Code.
 - Version check on pull requests to `main`: `version` in `package.json` must be greater than on `main` (semver, prereleases included), and `CHANGELOG.md` must have an entry for it. All jobs report to a single `Required checks` status for branch protection.
 - Release workflow on pushes to `main`: publishes to npm with provenance (trusted publishing, no token) and creates the `vX.Y.Z` tag and GitHub release from the CHANGELOG entry.
 
+[1.1.0]: https://github.com/victorcastro/engly/releases/tag/v1.1.0
 [1.0.0]: https://github.com/victorcastro/engly/releases/tag/v1.0.0

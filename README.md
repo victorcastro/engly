@@ -65,7 +65,20 @@ Sure, here's the updated function...
 > [!NOTE]
 > Engly is in early development. Today `engly init` works for **Claude Code**, and the package is not on npm yet. More agents and commands are coming soon.
 
-Install it from source:
+Install it with one command, no clone needed (requires Node.js 22.12+):
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | sh
+```
+
+The script downloads the source, builds it in a temporary folder and installs the `engly` command with npm. To install a specific version, set `ENGLY_REF`:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | ENGLY_REF=v1.1.0 sh
+```
+
+<details>
+<summary>Or install from a clone</summary>
 
 ```sh
 git clone https://github.com/victorcastro/engly.git
@@ -74,6 +87,8 @@ npm install
 npm run build
 npm link
 ```
+
+</details>
 
 Then, in your project:
 
