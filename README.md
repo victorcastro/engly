@@ -93,7 +93,6 @@ npm link
 Then, in your project:
 
 ```sh
-cd your-project
 engly init
 ```
 
