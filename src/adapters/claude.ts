@@ -12,6 +12,7 @@ export const claude: Adapter = {
     if (await anyExistsUpward(cwd, ['CLAUDE.md', '.claude/CLAUDE.md', 'CLAUDE.local.md'])) return 'CLAUDE.md';
     return (await anyExists(cwd, ['AGENTS.md'])) ? 'AGENTS.md' : 'CLAUDE.md';
   },
+  instructionFiles: ['CLAUDE.md', 'AGENTS.md'],
   skillDirs: ['.claude/skills'],
   sizeLimit: {
     maxLines: 200,

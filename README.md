@@ -60,7 +60,7 @@ Sure, here's the updated function...
 ## 🚀 Quick start
 
 > [!NOTE]
-> Engly is in early development. Today `engly init` works for **Claude Code**. More agents and commands are coming soon.
+> Engly is in early development. Today it works for **Claude Code**. More agents and `engly config` are coming soon.
 
 Install it with one command:
 
@@ -114,11 +114,11 @@ $ /engly-review   # Deep review of a prompt: every mistake, why, and better alte
 | Command | What it does |
 |---|---|
 | `engly init` | Sets up Engly in the current project. Asks two questions: which agents you use and how detailed the feedback should be. |
-| `engly update` | Updates the skills and instructions to the latest version. *(coming soon)* |
-| `engly enable` / `engly disable` | Turns the coach on or off permanently. *(coming soon)* |
+| `engly update` | Refreshes the skills and instructions in this project with the version of the CLI you have installed. To get a newer CLI, run `npm install -g engly@latest` first. |
+| `engly enable` / `engly disable` | Turns the coach on or off permanently in this project, without uninstalling anything. It takes effect in your next agent session. |
 | `engly config <option> <value>` | Changes a setting, e.g. `engly config level B2`. *(coming soon)* |
-| `engly status` | Shows where Engly is installed and whether it is active. *(coming soon)* |
-| `engly remove` | Removes everything Engly added. *(coming soon)* |
+| `engly status` | Shows where Engly is installed and whether it is active, and warns about anything that needs attention. |
+| `engly remove` | Removes everything Engly added and leaves the rest of your files as they were. Asks first; use `--yes` to skip the question. |
 
 `engly init` options:
 
@@ -183,7 +183,7 @@ Yes. Engly stays silent when your prompt is right, and at higher levels it sugge
 <details>
 <summary><b>How do I uninstall it?</b></summary>
 
-`engly remove` is coming soon. Until then, delete the `<!-- engly:start -->` … `<!-- engly:end -->` block from your agent file, then delete the `.engly/` folder and the `engly-*` skill folders.
+Run `engly remove` in your project. It deletes the Engly block from your agent file, the `.engly/` folder and the `engly-*` skills. Everything else stays exactly as it was. To only pause the coach, use `engly disable` instead.
 </details>
 
 ## 🤝 Contributing

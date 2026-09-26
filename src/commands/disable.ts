@@ -1,5 +1,5 @@
-import { notImplemented } from './not-implemented.js';
+import { setEnabled } from './set-enabled.js';
 
 export async function disableCommand(): Promise<void> {
-  notImplemented('disable');
+  await setEnabled(process.cwd(), false);
 }

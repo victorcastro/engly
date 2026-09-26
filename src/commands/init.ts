@@ -1,12 +1,14 @@
 import { join } from 'node:path';
 import * as p from '@clack/prompts';
-import { adapters, detectTools, IMPLEMENTED_TOOLS, skillTargets, TOOL_IDS, type ToolId } from '../adapters/index.js';
+import { adapters, detectTools, IMPLEMENTED_TOOLS, TOOL_IDS, type ToolId } from '../adapters/index.js';
 import { type BlockPosition, hasBlock, type UpsertAction, upsertBlock } from '../core/block.js';
 import { defaultConfig, readConfig, STYLES, type Style, writeConfig } from '../core/config.js';
 import { readTextIfExists, writeText } from '../core/fs.js';
 import { gitStatus } from '../core/git.js';
-import { readSkill, renderInstructions, SKILL_NAMES } from '../core/instructions.js';
-import { INSTRUCTIONS_FILE, packageVersion } from '../core/paths.js';
+import { installSkills, writeInstructions } from '../core/install.js';
+import { SKILL_NAMES } from '../core/instructions.js';
+import { packageVersion } from '../core/paths.js';
+import { blockContent } from '../core/project.js';
 import { checkSize, type SizeReport } from '../core/size.js';
 
 export interface InitOptions {
@@ -36,8 +38,7 @@ export async function initCommand(options: InitOptions): Promise<void> {
   }
 }
 
-async function runInit(options: InitOptions): Promise<void> {
-  const cwd = process.cwd();
+export async function runInit(options: InitOptions, cwd: string = process.cwd()): Promise<void> {
   const version = packageVersion();
   const interactive = !options.yes;
 
@@ -75,7 +76,7 @@ async function runInit(options: InitOptions): Promise<void> {
     if (placement === 'skip') apply = false;
     else position = placement;
   }
-  const planned = upsertBlock(current ?? '', `@${INSTRUCTIONS_FILE}`, { version, position });
+  const planned = upsertBlock(current ?? '', blockContent(true), { version, position });
 
   if (apply && interactive) {
     const choice = guard(
@@ -96,18 +97,14 @@ async function runInit(options: InitOptions): Promise<void> {
 
   const done: string[] = [];
 
-  await writeText(join(cwd, INSTRUCTIONS_FILE), await renderInstructions(config));
+  await writeInstructions(cwd, config);
 
   if (apply) {
     await writeText(agentPath, planned.text);
     done.push(`✓ ${agentFile} ${current === null ? 'created' : 'updated'}`);
   }
 
-  for (const dir of skillTargets(tools)) {
-    for (const skill of SKILL_NAMES) {
-      await writeText(join(cwd, dir, skill, 'SKILL.md'), await readSkill(skill));
-    }
-  }
+  await installSkills(cwd, tools);
   done.push(`✓ Skills installed: ${SKILL_NAMES.join(', ')}`);
 
   config.tools = tools;

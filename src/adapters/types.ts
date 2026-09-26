@@ -15,6 +15,8 @@ export interface Adapter {
   delivery: Delivery;
   detect(cwd: string): Promise<boolean>;
   instructionFile(cwd: string): string | Promise<string>;
+  // Every file `instructionFile` may have picked over time. Defaults to just that file.
+  instructionFiles?: readonly string[];
   // Order matters: the first folder is the one Engly installs to (see skillTargets).
   skillDirs: readonly string[];
   sizeLimit?: SizeLimit;
