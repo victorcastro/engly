@@ -1,0 +1,78 @@
+{
+  "name": "engly",
+  "version": "1.0.0",
+  "description": "Your English coach for AI prompts. One command. Every agent. Always on. Zero cost.",
+  "type": "module",
+  "bin": {
+    "engly": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=22.12"
+  },
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "coverage": "vitest run --coverage",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write .",
+    "check-version": "node scripts/check-version.mjs",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "cli",
+    "english",
+    "ai",
+    "claude-code",
+    "codex",
+    "opencode",
+    "cursor",
+    "copilot",
+    "agents",
+    "prompts",
+    "english-learning",
+    "language-learning",
+    "coach",
+    "prompt-engineering",
+    "claude",
+    "skills",
+    "agents-md",
+    "ai-agents"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@clack/prompts": "^1.8.1",
+    "commander": "^14.0.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.14",
+    "@types/node": "^22.20.4",
+    "@vitest/coverage-v8": "^4.1.11",
+    "tsup": "^8.5.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/victorcastro/engly.git"
+  },
+  "homepage": "https://github.com/victorcastro/engly#readme",
+  "bugs": {
+    "url": "https://github.com/victorcastro/engly/issues"
+  },
+  "author": {
+    "name": "Victor Castro",
+    "url": "https://github.com/victorcastro"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
