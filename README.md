@@ -107,7 +107,7 @@ While you chat with your agent:
 
 | Skill | What it does |
 |---|---|
-| `/engly-off` | Pause the coach for this session ("I'm in a hurry"). |
+| `/engly-off` | Pause the coach for this session. |
 | `/engly-on` | Resume the coach. |
 | `/engly-review` | Deep review of a prompt: every mistake, why, and better alternatives. |
 
