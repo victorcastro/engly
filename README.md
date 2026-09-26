@@ -79,12 +79,6 @@ sh -c "$(wget -qO- https://raw.githubusercontent.com/victorcastro/engly/main/ins
 
 </details>
 
-The script downloads the source, builds it in a temporary folder and installs the `engly` command with npm. To install a specific version, set `ENGLY_REF`:
-
-```sh
-ENGLY_REF=v1.1.0 sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
-```
-
 <details>
 <summary>Or install from a clone</summary>
 
