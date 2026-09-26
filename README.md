@@ -14,6 +14,13 @@ One command. Every agent. Always on. Zero cost.
 
 ---
 
+## 💡 Why Engly
+
+- **Always on.** Coaching starts with your next prompt, no command to remember.
+- **Never in your way.** A few lines of feedback, then the task goes on as usual.
+- **Zero cost.** No API keys, no extra model. The agent you already use does the coaching.
+- **For any level.** From A2 to C1, in any native language.
+
 You write prompts to an AI all day. Why not improve your English while you do it?
 
 Engly teaches the coding agent you already use (Claude Code, Codex, Cursor…) to coach your English. Every prompt becomes a tiny lesson: the agent shows you how to say it in clear English, points out a couple of mistakes, and then does the task as if you had written the better prompt.
@@ -51,14 +58,6 @@ Sure, here's the updated function...
 ```
 
 **Your English is already right?** Engly stays quiet and the agent just gets to work.
-
-## 💡 Why Engly
-
-- **Always on.** No command to remember. Coaching starts with your next prompt.
-- **Never in your way.** A few lines of feedback, then the task goes on. It never asks for confirmation.
-- **Zero cost.** No API keys and no calls to other models. The agent you already use does the coaching.
-- **Safe for your files.** Engly only writes inside its own marked block and never touches anything else.
-- **Made for learners.** Built with Spanish speakers in mind, and it works for any native language from A2 to C1.
 
 ## 🚀 Quick start
 
