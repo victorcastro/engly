@@ -62,7 +62,7 @@ Sure, here's the updated function...
 > [!NOTE]
 > Engly is in early development. Today `engly init` works for **Claude Code**, and the package is not on npm yet. More agents and commands are coming soon.
 
-Install it with one command, no clone needed (requires Node.js 22.12+):
+Install it with one command:
 
 ```sh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
