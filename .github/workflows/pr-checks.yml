@@ -59,13 +59,6 @@ jobs:
           test -f .engly/engly.md
           test -f .claude/skills/engly-review/SKILL.md
           grep -q '@.engly/engly.md' CLAUDE.md
-      - name: Smoke test install.sh
-        run: |
-          work="$(mktemp -d)"
-          git archive --prefix=engly/ -o "$work/source.tar.gz" HEAD
-          export npm_config_prefix="$work/global"
-          ENGLY_TARBALL="file://$work/source.tar.gz" sh install.sh
-          "$work/global/bin/engly" --version
 
   min-node:
     name: Minimum Node (22.12)

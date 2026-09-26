@@ -60,22 +60,13 @@ Sure, here's the updated function...
 ## 🚀 Quick start
 
 > [!NOTE]
-> Engly is in early development. Today `engly init` works for **Claude Code**, and the package is not on npm yet. More agents and commands are coming soon.
+> Engly is in early development. Today `engly init` works for **Claude Code**. More agents and commands are coming soon.
 
 Install it with one command:
 
 ```sh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
+npm install -g engly
 ```
-
-<details>
-<summary>No curl? Use wget</summary>
-
-```sh
-sh -c "$(wget -qO- https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
-```
-
-</details>
 
 <details>
 <summary>Or install from a clone</summary>
