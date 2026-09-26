@@ -5,6 +5,15 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.3.0] - 2026-09-26
+
+### Added
+
+- `engly status` shows whether Engly is on, its settings, where the block and skills are installed, and warns about anything that needs attention: broken markers, an agent file that is too long, missing files, or project files older than the CLI.
+- `engly disable` turns the coach off permanently by emptying the Engly block, and `engly enable` turns it back on. The block stays where it was.
+- `engly update` regenerates `.engly/engly.md`, the skills and the block with the installed CLI version and your settings. It never adds a block on its own: run `engly init` for that.
+- `engly remove` removes the Engly block, the `engly-*` skills and `.engly/`, and leaves the rest of your files as they were. It asks first; `--yes` skips the question.
+
 ## [1.2.0] - 2026-09-26
 
 ### Changed

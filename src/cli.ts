@@ -35,7 +35,11 @@ program
   .argument('<value>', 'new value')
   .action(configCommand);
 program.command('status').description('Show where Engly is installed and whether it is active').action(statusCommand);
-program.command('remove').description('Remove the Engly block, skills and config').action(removeCommand);
+program
+  .command('remove')
+  .description('Remove the Engly block, skills and config')
+  .option('-y, --yes', 'remove without asking')
+  .action(removeCommand);
 
 try {
   await program.parseAsync();

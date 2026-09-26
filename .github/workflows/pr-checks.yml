@@ -59,6 +59,26 @@ jobs:
           test -f .engly/engly.md
           test -f .claude/skills/engly-review/SKILL.md
           grep -q '@.engly/engly.md' CLAUDE.md
+      - name: Smoke test the other commands
+        run: |
+          cli="$PWD/dist/cli.js"
+          project="$(mktemp -d)"
+          cd "$project"
+          printf '# My project\n' > CLAUDE.md
+          cp CLAUDE.md original.md
+          case "$(node "$cli" status)" in *"not installed"*) ;; *) echo "status should say Engly is not installed"; exit 1 ;; esac
+          node "$cli" init --yes
+          node "$cli" status
+          node "$cli" disable
+          ! grep -q '@.engly/engly.md' CLAUDE.md
+          grep -q 'engly:start' CLAUDE.md
+          node "$cli" enable
+          grep -q '@.engly/engly.md' CLAUDE.md
+          node "$cli" update
+          node "$cli" remove --yes
+          test ! -e .engly
+          test ! -e .claude
+          cmp CLAUDE.md original.md
 
   min-node:
     name: Minimum Node (22.12)
