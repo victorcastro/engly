@@ -71,6 +71,15 @@ Install it with one command, no clone needed (requires Node.js 22.12+):
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
 ```
 
+<details>
+<summary>No curl? Use wget</summary>
+
+```sh
+sh -c "$(wget -qO- https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
+```
+
+</details>
+
 The script downloads the source, builds it in a temporary folder and installs the `engly` command with npm. To install a specific version, set `ENGLY_REF`:
 
 ```sh
