@@ -103,13 +103,13 @@ Once Engly is on npm, installing will be a single command: `npm install -g engly
 
 ## 💬 In-chat commands
 
-While you chat with your agent:
+While you chat with Claude Code:
 
-| Skill | What it does |
-|---|---|
-| `/engly-off` | Pause the coach for this session. |
-| `/engly-on` | Resume the coach. |
-| `/engly-review` | Deep review of a prompt: every mistake, why, and better alternatives. |
+```sh
+$ /engly-off      # Pause the coach for this session
+$ /engly-on       # Resume the coach
+$ /engly-review   # Deep review of a prompt: every mistake, why, and better alternatives
+```
 
 ## ⌨️ CLI commands
 
