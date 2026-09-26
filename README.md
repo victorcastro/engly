@@ -93,7 +93,7 @@ Open your agent as usual. Your next prompt will be coached. 🎉
 
 | Agent | Where Engly adds its instructions | Status |
 |---|---|---|
-| Claude Code | One import line in `CLAUDE.md` | ✅ Available |
+| Claude Code | One import line in `CLAUDE.md`, or in `AGENTS.md` when there is no `CLAUDE.md` | ✅ Available |
 | Codex | Marked block in `AGENTS.md` | 🛠️ Coming soon |
 | OpenCode | Marked block in `AGENTS.md` | 🛠️ Coming soon |
 | Cursor | Its own rule file, `.cursor/rules/engly.mdc` | 🛠️ Coming soon |

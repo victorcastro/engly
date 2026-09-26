@@ -1,5 +1,5 @@
 import { access } from 'node:fs/promises';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 
 export async function anyExists(cwd: string, paths: string[]): Promise<boolean> {
   for (const path of paths) {
@@ -9,4 +9,15 @@ export async function anyExists(cwd: string, paths: string[]): Promise<boolean> 
     } catch {}
   }
   return false;
+}
+
+// Same as anyExists, but also looks in every directory above `cwd`.
+export async function anyExistsUpward(cwd: string, paths: string[]): Promise<boolean> {
+  let dir = cwd;
+  while (true) {
+    if (await anyExists(dir, paths)) return true;
+    const parent = dirname(dir);
+    if (parent === dir) return false;
+    dir = parent;
+  }
 }
