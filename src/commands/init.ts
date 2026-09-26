@@ -58,8 +58,11 @@ async function runInit(options: InitOptions): Promise<void> {
   config.style = await chooseStyle(options, config.style);
 
   const adapter = adapters.claude;
-  const agentFile = adapter.instructionFile();
+  const agentFile = await adapter.instructionFile(cwd);
   const agentPath = join(cwd, agentFile);
+  if (agentFile === 'AGENTS.md') {
+    p.log.info('No CLAUDE.md found. Using AGENTS.md, which Claude Code reads when there is no CLAUDE.md.');
+  }
 
   const current = await readTextIfExists(agentPath);
   // Checked before any prompt or write, so broken markers fail early.
