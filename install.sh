@@ -1,7 +1,7 @@
 #!/bin/sh
 # Engly installer: installs the `engly` CLI globally without cloning the repository.
 #
-#   curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | sh
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
 #
 # It downloads the source, builds it in a temporary folder and installs it with npm.
 #

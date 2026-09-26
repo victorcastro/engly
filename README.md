@@ -68,13 +68,13 @@ Sure, here's the updated function...
 Install it with one command, no clone needed (requires Node.js 22.12+):
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
 ```
 
 The script downloads the source, builds it in a temporary folder and installs the `engly` command with npm. To install a specific version, set `ENGLY_REF`:
 
 ```sh
-curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | ENGLY_REF=v1.1.0 sh
+ENGLY_REF=v1.1.0 sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"
 ```
 
 <details>

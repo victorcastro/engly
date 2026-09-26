@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- `install.sh`: one-command install without cloning the repository, `curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh | sh`. It checks for Node.js 22.12+, downloads the source tarball (no git needed), builds it in a temporary folder and installs the packed CLI globally with npm. `ENGLY_REF` picks a branch, tag or commit.
+- `install.sh`: one-command install without cloning the repository, `sh -c "$(curl -fsSL https://raw.githubusercontent.com/victorcastro/engly/main/install.sh)"`. It checks for Node.js 22.12+, downloads the source tarball (no git needed), builds it in a temporary folder and installs the packed CLI globally with npm. `ENGLY_REF` picks a branch, tag or commit.
 - CI smoke test that runs `install.sh` against the pull request's own source.
 
 ## [1.0.0] - 2026-09-26
