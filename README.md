@@ -111,8 +111,6 @@ While you chat with your agent:
 | `/engly-on` | Resume the coach. |
 | `/engly-review` | Deep review of a prompt: every mistake, why, and better alternatives. |
 
-In Codex, use `$engly-off` instead of `/engly-off`. In any agent you can also just type **"engly off"** or **"engly on"**.
-
 ## ⌨️ CLI commands
 
 | Command | What it does |
