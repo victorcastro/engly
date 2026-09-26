@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - `engly init` for Claude Code writes the Engly block in `AGENTS.md` instead of creating a `CLAUDE.md` when there is an `AGENTS.md` and no `CLAUDE.md`, `.claude/CLAUDE.md` or `CLAUDE.local.md` in the project or any directory above it. Claude Code only reads `AGENTS.md` in that case.
+- CI and release workflows run on `ubuntu-24.04` instead of `ubuntu-latest`, ahead of the label moving to Ubuntu 26 on October 19, 2026.
 
 ## [1.1.0] - 2026-09-26
 
