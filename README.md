@@ -16,6 +16,11 @@ One command. Every agent. Always on. Zero cost.
 
 You write prompts to an AI all day. Why not improve your English while you do it?
 
+- **Always on.** Coaching starts with your next prompt, no command to remember.
+- **Never in your way.** A few lines of feedback, then the task goes on as usual.
+- **Zero cost.** No API keys, no extra model. The agent you already use does the coaching.
+- **For any level.** From A2 to C1, in any native language.
+
 Engly teaches the coding agent you already use (Claude Code, Codex, Cursor…) to coach your English. Every prompt becomes a tiny lesson: the agent shows you how to say it in clear English, points out a couple of mistakes, and then does the task as if you had written the better prompt.
 
 No extra app, no extra model, no extra cost. Just better English and clearer prompts.
@@ -52,20 +57,19 @@ Sure, here's the updated function...
 
 **Your English is already right?** Engly stays quiet and the agent just gets to work.
 
-## 💡 Why Engly
-
-- **Always on.** No command to remember. Coaching starts with your next prompt.
-- **Never in your way.** A few lines of feedback, then the task goes on. It never asks for confirmation.
-- **Zero cost.** No API keys and no calls to other models. The agent you already use does the coaching.
-- **Safe for your files.** Engly only writes inside its own marked block and never touches anything else.
-- **Made for learners.** Built with Spanish speakers in mind, and it works for any native language from A2 to C1.
-
 ## 🚀 Quick start
 
 > [!NOTE]
-> Engly is in early development. Today `engly init` works for **Claude Code**, and the package is not on npm yet. More agents and commands are coming soon.
+> Engly is in early development. Today `engly init` works for **Claude Code**. More agents and commands are coming soon.
 
-Install it from source:
+Install it with one command:
+
+```sh
+npm install -g engly
+```
+
+<details>
+<summary>Or install from a clone</summary>
 
 ```sh
 git clone https://github.com/victorcastro/engly.git
@@ -75,16 +79,15 @@ npm run build
 npm link
 ```
 
+</details>
+
 Then, in your project:
 
 ```sh
-cd your-project
 engly init
 ```
 
 Open your agent as usual. Your next prompt will be coached. 🎉
-
-Once Engly is on npm, installing will be a single command: `npm install -g engly`.
 
 ## 🤖 Supported agents
 
@@ -98,15 +101,13 @@ Once Engly is on npm, installing will be a single command: `npm install -g engly
 
 ## 💬 In-chat commands
 
-While you chat with your agent:
+While you chat with Claude Code:
 
-| Skill | What it does |
-|---|---|
-| `/engly-off` | Pause the coach for this session ("I'm in a hurry"). |
-| `/engly-on` | Resume the coach. |
-| `/engly-review` | Deep review of a prompt: every mistake, why, and better alternatives. |
-
-In Codex, use `$engly-off` instead of `/engly-off`. In any agent you can also just type **"engly off"** or **"engly on"**.
+```sh
+$ /engly-off      # Pause the coach for this session
+$ /engly-on       # Resume the coach
+$ /engly-review   # Deep review of a prompt: every mistake, why, and better alternatives
+```
 
 ## ⌨️ CLI commands
 
