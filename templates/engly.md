@@ -34,3 +34,9 @@ Prompt in another language (rule 2) — no bullets, just the English version:
 ┌ 🗣️ Engly
 │ Better: "Improved prompt in English."
 └
+
+Prompt in correct English (rule 4) — one-line confirmation, no corrections:
+
+┌ 🗣️ Engly
+│ ✓ Correct English.
+└
