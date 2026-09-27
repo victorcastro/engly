@@ -14,7 +14,7 @@ Review the text the user passed to this skill (or, if none, their previous promp
 
 Format:
 
-┌ 🗣️ Engly – detailed review
+┌ ✨ Engly – detailed review
 │ 1. "wrong" → "right"
 │    Explanation.
 │

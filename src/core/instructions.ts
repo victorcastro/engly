@@ -17,7 +17,7 @@ export async function renderInstructions(config: EnglyConfig): Promise<string> {
         ? 'show up to 3 corrections ("wrong" → "right" with a short reason) and the improved prompt.'
         : 'explain every mistake ("wrong" → "right" with a short reason) and show the improved prompt.',
     englishRule: config.reviewEnglish
-      ? 'Prompt in correct English: show nothing.'
+      ? 'Prompt in correct English: show only the one-line confirmation (format below), never corrections.'
       : 'Prompt in English: show nothing, even if it has mistakes.',
     lengthRule: config.style === 'light' ? 'Keep the note to 6 lines at most.' : 'Keep the note as short as possible.',
   };

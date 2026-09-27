@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.5.0] - 2026-09-27
+
+### Added
+
+- A correctly written English prompt now shows a one-line `✓ Correct English.` confirmation instead of no note at all, so it's clear the coach is still running.
+
+### Changed
+
+- Engly's icon switched from 🗣️ to ✨.
+
 ## [1.4.2] - 2026-09-27
 
 ### Fixed
