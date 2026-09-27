@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🗣️ Engly
+# ✨ Engly
 
 **Your English coach for AI prompts.**
 
@@ -33,7 +33,7 @@ No extra app, no extra model, no extra cost. Just better English and clearer pro
 You: arregla el bug del login que no deja entrar cuando el password tiene espacios
 
 Agent:
-┌ 🗣️ Engly
+┌ ✨ Engly
 │ In English: "Fix the login bug that blocks users when the
 │ password contains spaces."
 │ Tip: "contains" is more precise than "has" for strings.
@@ -47,7 +47,7 @@ I'll look at the login handler...
 You: make that the function return the users who has more than 3 orders
 
 Agent:
-┌ 🗣️ Engly
+┌ ✨ Engly
 │ • "make that the function return" → "make the function return"
 │ • "users who has" → "users who have" (plural subject)
 │ Better: "Make the function return users with more than 3 orders."
