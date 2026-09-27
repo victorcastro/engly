@@ -17,7 +17,6 @@ export async function runUpdate(cwd: string): Promise<void> {
   const config = await requireConfig(cwd, version);
   const previous = config.version;
   const tools = configuredTools(config);
-  // Read before any write, so broken markers stop the update with nothing changed.
   const blocks = await findBlocks(cwd, tools);
 
   config.version = version;

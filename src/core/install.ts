@@ -35,8 +35,6 @@ export async function skillStatus(cwd: string, tools: readonly ToolId[]): Promis
   return folders;
 }
 
-// Looks in every folder any agent uses, so it works even when the config is gone.
-// Only the engly-* folders are deleted; the parent folders go only if that leaves them empty.
 export async function removeSkills(cwd: string): Promise<string[]> {
   const dirs = new Set(Object.values(adapters).flatMap((adapter) => adapter.skillDirs));
   const removed: string[] = [];
@@ -68,7 +66,6 @@ export async function hasInstalledSkills(cwd: string): Promise<boolean> {
 
 async function removeEmptyDirs(cwd: string, relativeDir: string): Promise<void> {
   let dir = relativeDir;
-  // Up to two levels, e.g. .claude/skills then .claude.
   for (let level = 0; level < 2 && dir !== '.'; level++) {
     try {
       await rmdir(join(cwd, dir));

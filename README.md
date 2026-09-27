@@ -4,7 +4,7 @@
 
 **Your English coach for AI prompts.**
 
-One command. Every agent. Always on. Zero cost.
+One command. Every agent. Always on.
 
 [![Release](https://github.com/victorcastro/engly/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/victorcastro/engly/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -18,7 +18,7 @@ You write prompts to an AI all day. Why not improve your English while you do it
 
 - **Always on.** Coaching starts with your next prompt, no command to remember.
 - **Never in your way.** A few lines of feedback, then the task goes on as usual.
-- **Zero cost.** No API keys, no extra model. The agent you already use does the coaching.
+- **No API keys, no extra model.** The agent you already use does the coaching.
 - **For any level.** From A2 to C1, in any native language.
 
 Engly teaches the coding agent you already use (Claude Code, Codex, Cursor…) to coach your English. Every prompt becomes a tiny lesson: the agent shows you how to say it in clear English, points out a couple of mistakes, and then does the task as if you had written the better prompt.

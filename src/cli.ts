@@ -8,12 +8,15 @@ import { removeCommand } from './commands/remove.js';
 import { statusCommand } from './commands/status.js';
 import { updateCommand } from './commands/update.js';
 import { packageVersion } from './core/paths.js';
+import { notifyIfUpdateAvailable } from './core/update-check.js';
+
+notifyIfUpdateAvailable();
 
 const program = new Command();
 
 program
   .name('engly')
-  .description('Your English coach for AI prompts. One command. Every agent. Always on. Zero cost.')
+  .description('Your English coach for AI prompts. One command. Every agent. Always on.')
   .version(packageVersion());
 
 program

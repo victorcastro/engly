@@ -32,7 +32,6 @@ export async function runStatus(cwd: string): Promise<void> {
   const hasInstructions = await pathExists(join(cwd, INSTRUCTIONS_FILE));
   const skills = config ? await skillStatus(cwd, tools) : [];
 
-  // A plain CLAUDE.md or AGENTS.md is not a sign of Engly; only the block, config, instructions or skills are.
   const installed =
     config !== null ||
     configError !== null ||
@@ -45,7 +44,6 @@ export async function runStatus(cwd: string): Promise<void> {
     return;
   }
 
-  // The block is what the agent reads, so it decides whether the coach is on.
   const active = withBlock.some((file) => file.state === 'active');
   const status = withBlock.length === 0 ? 'off (no Engly block in the agent files)' : active ? 'enabled' : 'disabled';
 

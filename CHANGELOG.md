@@ -5,6 +5,22 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.4.1] - 2026-09-27
+
+### Fixed
+
+- Removed the leftover "Zero cost" claim from `engly help`/`--help` and from the npm package description.
+
+## [1.4.0] - 2026-09-27
+
+### Added
+
+- The CLI checks npm in the background (at most once a day, never blocking) and shows a notice when a newer engly version is available. Works in any directory, even without Engly installed in the project.
+
+### Changed
+
+- Removed the "Zero cost" claim from the README: the CLI now reaches npm for the update check above.
+
 ## [1.3.0] - 2026-09-26
 
 ### Added

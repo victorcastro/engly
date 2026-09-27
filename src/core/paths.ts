@@ -26,9 +26,22 @@ export function templatesDir(): string {
   return join(packageRoot(), 'templates');
 }
 
+export interface PackageInfo {
+  name: string;
+  version: string;
+}
+
+let cachedInfo: PackageInfo | undefined;
+
+export function packageInfo(): PackageInfo {
+  if (cachedInfo) return cachedInfo;
+  const pkg = JSON.parse(readFileSync(join(packageRoot(), 'package.json'), 'utf8')) as PackageInfo;
+  cachedInfo = { name: pkg.name, version: pkg.version };
+  return cachedInfo;
+}
+
 export function packageVersion(): string {
-  const pkg = JSON.parse(readFileSync(join(packageRoot(), 'package.json'), 'utf8')) as { version: string };
-  return pkg.version;
+  return packageInfo().version;
 }
 
 export const ENGLY_DIR = '.engly';
