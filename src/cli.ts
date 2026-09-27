@@ -8,6 +8,9 @@ import { removeCommand } from './commands/remove.js';
 import { statusCommand } from './commands/status.js';
 import { updateCommand } from './commands/update.js';
 import { packageVersion } from './core/paths.js';
+import { notifyIfUpdateAvailable } from './core/update-check.js';
+
+notifyIfUpdateAvailable();
 
 const program = new Command();
 
