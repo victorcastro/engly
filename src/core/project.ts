@@ -12,11 +12,9 @@ export interface AgentFile {
   path: string;
   text: string;
   state: AgentFileState;
-  // Set when the state is "broken".
   error?: string;
 }
 
-// A disabled block keeps its markers and loses its content, so it stays where the user had it.
 export function blockContent(enabled: boolean): string {
   return enabled ? `@${INSTRUCTIONS_FILE}` : '';
 }
@@ -36,8 +34,6 @@ export async function inspectAgentFile(cwd: string, file: string): Promise<Agent
   }
 }
 
-// The block may live in any file `engly init` could have picked: Claude Code's choice between
-// CLAUDE.md and AGENTS.md depends on which files exist today, not on when Engly was installed.
 export async function candidateFiles(cwd: string, tools: readonly ToolId[]): Promise<string[]> {
   const files = new Set<string>();
   for (const tool of tools) {
@@ -57,7 +53,6 @@ export async function inspectAgentFiles(cwd: string, tools: readonly ToolId[]): 
   return files;
 }
 
-// Files that contain an Engly block. Broken markers throw: editing around them could destroy user content.
 export async function findBlocks(cwd: string, tools: readonly ToolId[]): Promise<AgentFile[]> {
   const files = await inspectAgentFiles(cwd, tools);
   for (const file of files) {
@@ -72,7 +67,6 @@ export async function requireConfig(cwd: string, version: string): Promise<Engly
   return config;
 }
 
-// Only tools Engly supports today; a config written by a newer version may list more.
 export function configuredTools(config: EnglyConfig | null): ToolId[] {
   const tools = config?.tools.filter((tool) => IMPLEMENTED_TOOLS.includes(tool)) ?? [];
   return tools.length > 0 ? tools : [...IMPLEMENTED_TOOLS];

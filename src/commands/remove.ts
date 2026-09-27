@@ -22,7 +22,6 @@ export async function runRemove(cwd: string, options: RemoveOptions): Promise<vo
   const version = packageVersion();
   p.intro(`Engly  v${version}`);
 
-  // A broken config must not stop the removal: the block and skills are found without it.
   let config: EnglyConfig | null = null;
   try {
     config = await readConfig(cwd, version);
@@ -59,7 +58,6 @@ export async function runRemove(cwd: string, options: RemoveOptions): Promise<vo
     }
   }
 
-  // The config goes last, so a failed run can be repeated.
   const done: string[] = [];
   for (const block of blocks) {
     await writeText(block.path, removeBlock(block.text).text);
