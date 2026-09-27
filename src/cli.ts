@@ -16,7 +16,7 @@ const program = new Command();
 
 program
   .name('engly')
-  .description('Your English coach for AI prompts. One command. Every agent. Always on. Zero cost.')
+  .description('Your English coach for AI prompts. One command. Every agent. Always on.')
   .version(packageVersion());
 
 program

@@ -1,7 +1,7 @@
 {
   "name": "engly",
-  "version": "1.4.0",
-  "description": "Your English coach for AI prompts. One command. Every agent. Always on. Zero cost.",
+  "version": "1.4.1",
+  "description": "Your English coach for AI prompts. One command. Every agent. Always on.",
   "type": "module",
   "bin": {
     "engly": "dist/cli.js"
