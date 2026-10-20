@@ -1,0 +1,35 @@
+---
+import { navLinks, repoUrl } from '../data/content';
+---
+
+<header class="site-header">
+  <nav class="nav" aria-label="Main">
+    <a href="#top" class="brand"><span aria-hidden="true">✨</span>Engly</a>
+    <div class="nav-links">
+      {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    </div>
+    <div class="nav-actions">
+      <button type="button" class="icon-btn" data-theme-toggle aria-label="Switch to light theme">
+        <span class="theme-icon theme-icon--dark" aria-hidden="true">☀</span>
+        <span class="theme-icon theme-icon--light" aria-hidden="true">☾</span>
+      </button>
+      <a href={repoUrl} class="btn btn--outline nav-star"><span aria-hidden="true" class="star">★</span>Star on GitHub</a>
+      <a href="#how" class="btn btn--primary">Get started</a>
+      <button
+        type="button"
+        class="icon-btn menu-btn"
+        data-menu-toggle
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Menu"
+      >
+        <span class="menu-icon menu-icon--open" aria-hidden="true">☰</span>
+        <span class="menu-icon menu-icon--close" aria-hidden="true">✕</span>
+      </button>
+    </div>
+  </nav>
+  <div id="mobile-menu" class="mobile-menu" hidden>
+    {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
+    <a href={repoUrl}><span class="star">★</span> Star on GitHub</a>
+  </div>
+</header>

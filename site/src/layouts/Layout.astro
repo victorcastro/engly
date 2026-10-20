@@ -1,0 +1,47 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import '../styles/layout.css';
+import '../styles/header.css';
+import '../styles/hero.css';
+import '../styles/sections.css';
+import '../styles/animations.css';
+
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content="Engly — Improve your English while you code with AI" />
+    <meta property="og:description" content="One command. Every agent. Always on. Open source, MIT." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://github.com/victorcastro/engly" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script is:inline>
+      document.documentElement.classList.add('js');
+      try {
+        const theme = localStorage.getItem('engly-theme');
+        if (theme === 'light' || theme === 'dark') document.documentElement.dataset.theme = theme;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <slot />
+    <script>
+      import '../scripts/main';
+    </script>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+---
+import { footerColumns } from '../data/content';
+---
+
+<footer class="site-footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <strong>✨ Engly</strong>
+      <p>Your English coach for AI prompts. One command. Every agent. Always on.</p>
+    </div>
+    {
+      footerColumns.map((column) => (
+        <nav class="footer-col" aria-label={column.label}>
+          <span class="footer-heading">{column.label}</span>
+          {column.links.map((link) => <a href={link.href}>{link.label}</a>)}
+        </nav>
+      ))
+    }
+  </div>
+  <div class="footer-bottom">
+    <span>Made by <a href="https://github.com/victorcastro">Victor Castro</a></span>
+    <span>© 2026 Engly</span>
+  </div>
+</footer>

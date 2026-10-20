@@ -1,0 +1,244 @@
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    translate: 0 24px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes slide-in {
+  from {
+    opacity: 0;
+    translate: 32px 0;
+    scale: 0.96;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    translate: 0 40px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+
+  50% {
+    opacity: 0.35;
+    scale: 1.7;
+  }
+}
+
+@keyframes drop-in {
+  from {
+    opacity: 0;
+    translate: 0 -8px;
+  }
+
+  to {
+    opacity: 1;
+    translate: 0 0;
+  }
+}
+
+@keyframes grow-bar {
+  from {
+    scale: 0 1;
+  }
+
+  to {
+    scale: 1 1;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    translate: 0 0;
+  }
+
+  50% {
+    translate: 0 -8px;
+  }
+}
+
+.hero-copy > * {
+  animation: fade-up 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.hero-copy > :nth-child(2) {
+  animation-delay: 0.08s;
+}
+
+.hero-copy > :nth-child(3) {
+  animation-delay: 0.16s;
+}
+
+.hero-copy > :nth-child(4) {
+  animation-delay: 0.24s;
+}
+
+.hero-copy > :nth-child(5) {
+  animation-delay: 0.32s;
+}
+
+.terminal {
+  animation:
+    slide-in 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) 0.2s both,
+    float-y 7s ease-in-out 1.2s infinite;
+}
+
+.pulse-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+.pill {
+  animation: fade-up 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+.pill:nth-child(2) {
+  animation-delay: 0.05s;
+}
+
+.pill:nth-child(3) {
+  animation-delay: 0.1s;
+}
+
+.pill:nth-child(4) {
+  animation-delay: 0.15s;
+}
+
+.pill:nth-child(5) {
+  animation-delay: 0.2s;
+}
+
+.pill:nth-child(6) {
+  animation-delay: 0.25s;
+}
+
+.pill:nth-child(7) {
+  animation-delay: 0.3s;
+}
+
+.faq-a,
+.chat-body,
+.cmd-panel {
+  animation: drop-in 0.3s ease both;
+}
+
+@media (hover: hover) {
+  .card,
+  .pill,
+  .tab,
+  .btn,
+  .icon-btn,
+  .faq-q {
+    transition:
+      transform 0.25s cubic-bezier(0.2, 0.7, 0.2, 1),
+      border-color 0.25s,
+      box-shadow 0.25s,
+      background-color 0.25s,
+      padding 0.25s;
+  }
+
+  .card:not(.cmd-panel):hover {
+    transform: translateY(-6px);
+    border-color: var(--acc);
+    box-shadow: 0 18px 40px -22px var(--acc);
+  }
+
+  .pill:hover {
+    transform: translateY(-2px);
+    border-color: var(--acc);
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  .btn:active {
+    transform: translateY(0) scale(0.97);
+  }
+
+  .icon-btn:hover .theme-icon {
+    display: inline-block;
+    transform: rotate(18deg);
+  }
+
+  .faq-q:hover {
+    padding-left: 8px;
+  }
+
+  .nav-links a {
+    position: relative;
+  }
+
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: var(--acc);
+    border-radius: 2px;
+    scale: 0 1;
+    transform-origin: left;
+    transition: scale 0.25s ease;
+  }
+
+  .nav-links a:hover::after {
+    scale: 1 1;
+  }
+}
+
+@supports (animation-timeline: view()) {
+  .section > :not(.stagger),
+  .stagger > * {
+    animation: reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 45%;
+  }
+
+  .stagger > :nth-child(3n + 2) {
+    animation-range: entry 8% entry 53%;
+  }
+
+  .stagger > :nth-child(3n + 3) {
+    animation-range: entry 16% entry 61%;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--acc);
+    transform-origin: left;
+    z-index: 30;
+    animation: grow-bar linear both;
+    animation-timeline: scroll(root);
+  }
+}

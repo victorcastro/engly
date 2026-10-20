@@ -1,0 +1,44 @@
+html {
+  --bg: oklch(0.155 0.012 295);
+  --bg2: oklch(0.185 0.014 295);
+  --card: oklch(0.2 0.016 295);
+  --line: oklch(0.3 0.02 295);
+  --fg: oklch(0.965 0.006 295);
+  --mut: oklch(0.76 0.02 295);
+  --acc: oklch(0.76 0.15 300);
+  --accbg: oklch(0.76 0.15 300 / 0.12);
+  --warm: oklch(0.82 0.13 65);
+  --ok: oklch(0.8 0.14 155);
+  --onacc: oklch(0.16 0.03 300);
+  --term: oklch(0.12 0.012 295);
+  --tline: oklch(0.27 0.02 295);
+  --tfg: oklch(0.93 0.01 295);
+  --tmut: oklch(0.7 0.02 295);
+  --tacc: oklch(0.78 0.15 300);
+  --tok: oklch(0.8 0.14 155);
+  --twarm: oklch(0.83 0.13 65);
+  --bubble: oklch(0.2 0.016 295);
+  --sans: 'Geist Variable', system-ui, sans-serif;
+  --mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --max: 1160px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --section-gap: clamp(72px, 10vw, 120px);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+html[data-theme='light'] {
+  --bg: oklch(0.985 0.004 295);
+  --bg2: oklch(0.965 0.007 295);
+  --card: oklch(0.995 0.002 295);
+  --line: oklch(0.89 0.012 295);
+  --fg: oklch(0.2 0.02 295);
+  --mut: oklch(0.45 0.02 295);
+  --acc: oklch(0.5 0.2 300);
+  --accbg: oklch(0.5 0.2 300 / 0.08);
+  --warm: oklch(0.55 0.14 55);
+  --ok: oklch(0.5 0.13 155);
+  --onacc: oklch(0.99 0.004 295);
+  color-scheme: light;
+}
