@@ -15,6 +15,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Node.js 24 or newer is now required (was 22.12).
 - `engly init` never picks the agents for you: choose them in the list (detected agents are marked) or pass `--tools`. Without a terminal, `--tools` is required.
 - Landing page and README list Codex as available.
 
