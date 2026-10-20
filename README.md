@@ -10,7 +10,7 @@ One command. Every agent. Always on.
 
 [![Release](https://github.com/victorcastro/engly/actions/workflows/release.yml/badge.svg?branch=main)](https://github.com/victorcastro/engly/actions/workflows/release.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D22.12-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D24-339933?logo=node.js&logoColor=white)](https://nodejs.org)
 
 </div>
 
@@ -30,7 +30,7 @@ No extra app, no extra model, no extra cost. Just better English and clearer pro
 ## 🚀 Quick start
 
 > [!NOTE]
-> Engly is in early development. Today it works for **Claude Code**. More agents and `engly config` are coming soon.
+> Engly is in early development. Today it works for **Claude Code** and **Codex**. More agents and `engly config` are coming soon.
 
 Install it with one command:
 
@@ -63,13 +63,13 @@ Open your agent as usual. Your next prompt will be coached. 🎉
 
 | Command | Description |
 |---|---|
-| `engly init` | Set up Engly in the project. Flags: `--tools`, `--style light\|detailed`, `--yes`, `--no-apply` |
+| `engly init` | Set up Engly in the project. Flags: `--tools claude,codex`, `--style light\|detailed`, `--no-apply` |
 | `engly update` | Refresh skills and instructions to the installed version |
 | `engly enable` / `disable` | Turn the coach on or off for the project |
 | `engly status` | Show where Engly is installed and whether it is active |
 | `engly remove` | Remove everything Engly added |
 
-In chat: `/engly-on`, `/engly-off`, `/engly-review`.
+In chat: `/engly-on`, `/engly-off`, `/engly-review` in Claude Code, `$engly-on`, `$engly-off`, `$engly-review` in Codex.
 
 ## Config
 
@@ -85,7 +85,7 @@ In chat: `/engly-on`, `/engly-off`, `/engly-review`.
 
 ## Footprint
 
-`engly init` adds `.engly/`, the `engly-*` skills and one marked block in your agent file. Nothing else is touched, and `engly remove` undoes it.
+`engly init` adds `.engly/`, the `engly-*` skills (`.claude/skills/`, `.agents/skills/`) and one marked block in each agent file (`CLAUDE.md`, `AGENTS.md`). Nothing else is touched, and `engly remove` undoes it.
 
 ## Contributing
 

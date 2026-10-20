@@ -32,7 +32,8 @@ const exists = (file: string) =>
     () => true,
     () => false,
   );
-const install = (options: { apply?: boolean } = {}) => runInit({ yes: true, apply: options.apply ?? true }, root);
+const install = (options: { apply?: boolean; tools?: string } = {}) =>
+  runInit({ tools: options.tools ?? 'claude', apply: options.apply ?? true }, root);
 const config = async () => JSON.parse(await read('.engly/config.json')) as { enabled: boolean; version: string };
 
 const USER_TEXT = '# My project\n\nUse tabs.\n\n## Tests\n\nRun npm test.\n';
@@ -419,5 +420,96 @@ describe('status', () => {
     await rm(join(root, '.engly/config.json'));
     await runStatus(root);
     expect((await lines()).warnings.join('\n')).toContain('.engly/config.json is missing');
+  });
+});
+
+describe('init', () => {
+  it('asks for --tools when there is no terminal', async () => {
+    await expect(runInit({ apply: true }, root)).rejects.toThrow('Pass the agents with --tools');
+    expect(await exists('.engly')).toBe(false);
+  });
+});
+
+describe('codex', () => {
+  const block = async (file: string) => {
+    const text = await read(file);
+    return text.slice(text.indexOf('<!-- engly:start'), text.indexOf('<!-- engly:end -->'));
+  };
+
+  it('embeds the instructions in AGENTS.md and installs the skills in .agents/skills', async () => {
+    await write('AGENTS.md', USER_TEXT);
+    await install({ tools: 'codex' });
+
+    const text = await read('AGENTS.md');
+    expect(text.startsWith(USER_TEXT)).toBe(true);
+    expect(await block('AGENTS.md')).toContain('Engly – English coach');
+    expect(text).not.toContain('@.engly/engly.md');
+    expect(await exists('.agents/skills/engly-on/SKILL.md')).toBe(true);
+    expect(await exists('.claude')).toBe(false);
+    expect(await exists('CLAUDE.md')).toBe(false);
+  });
+
+  it('shares one embedded block in AGENTS.md with Claude Code when there is no CLAUDE.md', async () => {
+    await write('AGENTS.md', USER_TEXT);
+    await install({ tools: 'claude,codex' });
+
+    expect(await exists('CLAUDE.md')).toBe(false);
+    expect(await block('AGENTS.md')).toContain('Engly – English coach');
+    expect(await exists('.claude/skills/engly-on/SKILL.md')).toBe(true);
+    expect(await exists('.agents/skills/engly-on/SKILL.md')).toBe(true);
+  });
+
+  it('imports in CLAUDE.md and embeds in AGENTS.md when both agents have their own file', async () => {
+    await write('CLAUDE.md', USER_TEXT);
+    await install({ tools: 'claude,codex' });
+
+    expect(await block('CLAUDE.md')).toContain('@.engly/engly.md');
+    expect(await block('AGENTS.md')).toContain('Engly – English coach');
+  });
+
+  it('regenerates the embedded block with the settings on update', async () => {
+    await install({ tools: 'codex' });
+    await write('.engly/config.json', JSON.stringify({ ...(await config()), style: 'detailed' }));
+
+    await runUpdate(root);
+    expect(await block('AGENTS.md')).toContain('explain every mistake');
+  });
+
+  it('empties and restores the embedded block', async () => {
+    await write('AGENTS.md', USER_TEXT);
+    await install({ tools: 'codex' });
+    const enabled = await read('AGENTS.md');
+
+    await setEnabled(root, false);
+    expect(await read('AGENTS.md')).toBe(
+      `${USER_TEXT}\n<!-- engly:start v${packageVersion()} -->\n<!-- engly:end -->\n`,
+    );
+
+    await setEnabled(root, true);
+    expect(await read('AGENTS.md')).toBe(enabled);
+  });
+
+  it('removes every block and skill folder', async () => {
+    await write('CLAUDE.md', USER_TEXT);
+    await write('AGENTS.md', USER_TEXT);
+    await install({ tools: 'claude,codex' });
+
+    await runRemove(root, { yes: true });
+    expect(await read('CLAUDE.md')).toBe(USER_TEXT);
+    expect(await read('AGENTS.md')).toBe(USER_TEXT);
+    expect(await exists('.claude')).toBe(false);
+    expect(await exists('.agents')).toBe(false);
+    expect(await exists('.engly')).toBe(false);
+  });
+
+  it('warns in status when the embedded block does not match the settings', async () => {
+    const p = await import('@clack/prompts');
+    vi.mocked(p.log.warn).mockClear();
+    await install({ tools: 'codex' });
+    await write('.engly/config.json', JSON.stringify({ ...(await config()), style: 'detailed' }));
+
+    await runStatus(root);
+    const warnings = vi.mocked(p.log.warn).mock.calls.map(([message]) => String(message));
+    expect(warnings.join('\n')).toContain('The Engly block in AGENTS.md does not match your settings');
   });
 });

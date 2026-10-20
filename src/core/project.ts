@@ -1,8 +1,9 @@
 import { join } from 'node:path';
-import { adapters, IMPLEMENTED_TOOLS, type ToolId } from '../adapters/index.js';
+import { adapters, type Delivery, IMPLEMENTED_TOOLS, type ToolId } from '../adapters/index.js';
 import { BlockError, readBlock } from './block.js';
 import { type EnglyConfig, readConfig } from './config.js';
 import { readTextIfExists } from './fs.js';
+import { renderInstructions } from './instructions.js';
 import { INSTRUCTIONS_FILE } from './paths.js';
 
 export type AgentFileState = 'missing' | 'no-block' | 'active' | 'inactive' | 'broken';
@@ -12,24 +13,40 @@ export interface AgentFile {
   path: string;
   text: string;
   state: AgentFileState;
+  delivery: Delivery;
   error?: string;
 }
 
-export function blockContent(enabled: boolean): string {
-  return enabled ? `@${INSTRUCTIONS_FILE}` : '';
+export async function blockContent(config: EnglyConfig, delivery: Delivery): Promise<string> {
+  if (!config.enabled) return '';
+  return delivery === 'embedded' ? renderInstructions(config) : `@${INSTRUCTIONS_FILE}`;
 }
 
-export async function inspectAgentFile(cwd: string, file: string): Promise<AgentFile> {
+export function deliveryFor(file: string, tools: readonly ToolId[]): Delivery {
+  const embedded = tools.some((tool) => {
+    const adapter = adapters[tool];
+    return adapter.delivery === 'embedded' && adapter.instructionFiles?.includes(file);
+  });
+  return embedded ? 'embedded' : 'import';
+}
+
+export function isOutdated(file: AgentFile, expected: string): boolean {
+  if (file.state !== 'active') return false;
+  const normalize = (text: string) => text.replace(/\r\n/g, '\n').trim();
+  return normalize(readBlock(file.text) ?? '') !== normalize(expected);
+}
+
+export async function inspectAgentFile(cwd: string, file: string, delivery: Delivery = 'import'): Promise<AgentFile> {
   const path = join(cwd, file);
   const text = await readTextIfExists(path);
-  if (text === null) return { file, path, text: '', state: 'missing' };
+  if (text === null) return { file, path, text: '', state: 'missing', delivery };
 
   try {
     const content = readBlock(text);
-    if (content === null) return { file, path, text, state: 'no-block' };
-    return { file, path, text, state: content.trim() === '' ? 'inactive' : 'active' };
+    if (content === null) return { file, path, text, state: 'no-block', delivery };
+    return { file, path, text, state: content.trim() === '' ? 'inactive' : 'active', delivery };
   } catch (error) {
-    if (error instanceof BlockError) return { file, path, text, state: 'broken', error: error.message };
+    if (error instanceof BlockError) return { file, path, text, state: 'broken', delivery, error: error.message };
     throw error;
   }
 }
@@ -47,7 +64,7 @@ export async function candidateFiles(cwd: string, tools: readonly ToolId[]): Pro
 export async function inspectAgentFiles(cwd: string, tools: readonly ToolId[]): Promise<AgentFile[]> {
   const files: AgentFile[] = [];
   for (const file of await candidateFiles(cwd, tools)) {
-    const inspected = await inspectAgentFile(cwd, file);
+    const inspected = await inspectAgentFile(cwd, file, deliveryFor(file, tools));
     if (inspected.state !== 'missing') files.push(inspected);
   }
   return files;

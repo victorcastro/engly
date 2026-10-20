@@ -24,7 +24,6 @@ program
   .description('Install Engly in the current project')
   .option('--tools <tools>', 'comma-separated agents: claude,codex,opencode,cursor,copilot')
   .option('--style <style>', 'feedback style: light or detailed')
-  .option('-y, --yes', 'accept all defaults without asking')
   .option('--no-apply', "only install the skills, don't touch the agent files")
   .action(initCommand);
 

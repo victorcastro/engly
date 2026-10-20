@@ -25,7 +25,7 @@ export async function runUpdate(cwd: string): Promise<void> {
 
   const done = ['✓ .engly/engly.md and skills refreshed'];
   for (const block of blocks) {
-    const { text } = upsertBlock(block.text, blockContent(config.enabled), { version });
+    const { text } = upsertBlock(block.text, await blockContent(config, block.delivery), { version });
     if (text === block.text) {
       done.push(`✓ ${block.file} block is up to date`);
       continue;

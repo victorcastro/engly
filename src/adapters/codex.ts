@@ -7,6 +7,7 @@ export const codex: Adapter = {
   delivery: 'embedded',
   detect: (cwd) => anyExists(cwd, ['.codex', 'AGENTS.md']),
   instructionFile: () => 'AGENTS.md',
+  instructionFiles: ['AGENTS.md'],
   skillDirs: ['.agents/skills'],
   sizeLimit: {
     // Real limit is 32 KiB for all AGENTS.md files combined (spec §9.6).
