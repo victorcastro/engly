@@ -1,0 +1,76 @@
+---
+import { demoTabs } from '../data/content';
+import SectionHead from './SectionHead.astro';
+---
+
+<section class="section" aria-labelledby="demo-title">
+  <SectionHead id="demo-title" eyebrow="demo" title="See it in action">
+    <p class="section-lead">
+      Every prompt becomes a short lesson. The agent shows you how to say it in clear English, then does the task as if
+      you had written the better prompt.
+    </p>
+  </SectionHead>
+  <div class="tablist demo-tabs" role="tablist" aria-label="Demo scenarios" data-tabs data-autoplay>
+    {
+      demoTabs.map((label, index) => (
+        <button
+          type="button"
+          role="tab"
+          class="tab"
+          id={`demo-tab-${index}`}
+          aria-selected={index === 0 ? 'true' : 'false'}
+          aria-controls={`demo-panel-${index}`}
+          tabindex={index === 0 ? 0 : -1}
+        >
+          {label}
+        </button>
+      ))
+    }
+  </div>
+  <div class="window chat">
+    <div class="window-bar chat-bar"><span class="t-warm">✻</span>Claude Code<span>engly · light</span></div>
+
+    <div class="chat-body" role="tabpanel" id="demo-panel-0" aria-labelledby="demo-tab-0" tabindex="0">
+      <div class="chat-prompt">
+        <span class="t-mut">&gt; </span>arregla el bug del login que no deja entrar cuando el password tiene espacios
+      </div>
+      <div class="chat-engly">
+        <span class="ln">┌ ✨ Engly</span>
+        <span class="ln">│ <span class="t-hint">Better:</span> <span class="t-fg">"Fix the login bug that blocks users when the password contains spaces."</span></span>
+        <span class="ln">└</span>
+      </div>
+      <div class="chat-agent">
+        <span class="ln"><span class="t-fg">●</span> Reading src/auth/login.ts…</span>
+        <span class="ln"><span class="t-fg">●</span> The validator rejects passwords with whitespace. Updating it…</span>
+      </div>
+    </div>
+
+    <div class="chat-body" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" tabindex="0" hidden>
+      <div class="chat-prompt">
+        <span class="t-mut">&gt; </span><span class="t-err">make that the</span> function return the users <span class="t-err">who has</span> more than 3 orders
+      </div>
+      <div class="chat-engly">
+        <span class="ln">┌ ✨ Engly</span>
+        <span class="ln">│ <span class="t-fg">• <span class="t-err">"make that the function return"</span> → <span class="t-ok">"make the function return"</span></span></span>
+        <span class="ln">│ <span class="t-fg">• <span class="t-err">"users who has"</span> → <span class="t-ok">"users who have"</span> <span class="t-mut">(plural subject)</span></span></span>
+        <span class="ln">│ <span class="t-hint">Better:</span> <span class="t-fg">"Make the function return users with more than 3 orders."</span></span>
+        <span class="ln">└</span>
+      </div>
+      <div class="chat-agent">
+        <span class="ln"><span class="t-fg">●</span> Updating getUsers() to filter by order count…</span>
+      </div>
+    </div>
+
+    <div class="chat-body" role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" tabindex="0" hidden>
+      <div class="chat-prompt"><span class="t-mut">&gt; </span>Add a loading spinner to the checkout button.</div>
+      <div class="chat-engly">
+        <span class="ln">┌ ✨ Engly</span>
+        <span class="ln">│ <span class="t-ok">✓ Correct English.</span></span>
+        <span class="ln">└</span>
+      </div>
+      <div class="chat-agent">
+        <span class="ln"><span class="t-fg">●</span> Adding a spinner to CheckoutButton while the request is pending…</span>
+      </div>
+    </div>
+  </div>
+</section>

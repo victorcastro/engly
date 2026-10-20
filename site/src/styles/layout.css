@@ -1,0 +1,177 @@
+.container {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+.section {
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: var(--section-gap) var(--gutter) 0;
+}
+
+.section-head {
+  max-width: 640px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+}
+
+.section-head--wide {
+  max-width: none;
+  margin-bottom: 28px;
+}
+
+.eyebrow {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--acc);
+}
+
+.section-title {
+  font-size: clamp(30px, 4vw, 44px);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+}
+
+.section-lead {
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--mut);
+  text-wrap: pretty;
+}
+
+.section-lead code,
+.feature p code,
+.agent p code,
+.faq-a code {
+  color: var(--fg);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  height: 36px;
+  padding: 0 14px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.btn--lg {
+  height: 48px;
+  padding: 0 22px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.btn--primary {
+  background: var(--acc);
+  color: var(--onacc);
+}
+
+.btn--primary:hover {
+  color: var(--onacc);
+  filter: brightness(1.08);
+}
+
+.btn--outline {
+  gap: 6px;
+  border: 1px solid var(--line);
+  color: var(--fg);
+  font-weight: 500;
+}
+
+.btn--outline:hover {
+  border-color: var(--acc);
+  color: var(--fg);
+}
+
+.btn--lg.btn--outline {
+  gap: 8px;
+  background: var(--bg2);
+}
+
+.chip {
+  font-family: var(--mono);
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid var(--tline);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--tmut);
+  cursor: pointer;
+}
+
+.chip:hover {
+  border-color: var(--tacc);
+  color: var(--tfg);
+}
+
+.cmd-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 10px 10px 14px;
+  background: var(--term);
+  border: 1px solid var(--tline);
+  border-radius: 9px;
+  font-family: var(--mono);
+  font-size: 13.5px;
+  color: var(--tfg);
+}
+
+.cmd-box code {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.tablist {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--bg2);
+}
+
+.tab {
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--mut);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.tab[aria-selected='true'] {
+  background: var(--card);
+  color: var(--fg);
+}
+
+.window {
+  background: var(--term);
+  border: 1px solid var(--tline);
+  border-radius: 14px;
+  overflow: hidden;
+  color: var(--tfg);
+}
+
+.window-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid var(--tline);
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--tmut);
+}
+
+.window-bar .chip {
+  margin-left: auto;
+}

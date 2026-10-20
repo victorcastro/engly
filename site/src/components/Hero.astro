@@ -1,0 +1,49 @@
+---
+import { initCommand, installCommand, repoUrl, terminalLines } from '../data/content';
+import CopyButton from './CopyButton.astro';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <span class="badge"><span class="pulse-dot"></span>Open source · MIT</span>
+    <h1 id="hero-title">Improve <span class="accent">your English</span> while you code with AI.</h1>
+    <p class="hero-lead">
+      Engly teaches the coding agent you already use to coach your English. No extra app, no API keys, no extra model.
+    </p>
+    <div class="hero-actions">
+      <a href="#how" class="btn btn--lg btn--primary">Get started</a>
+      <a href={repoUrl} class="btn btn--lg btn--outline">View on GitHub <span aria-hidden="true">→</span></a>
+    </div>
+    <p class="hero-note">Works today with Claude Code · more agents soon</p>
+  </div>
+
+  <div class="terminal" data-terminal>
+    <div class="terminal-bar">
+      <span class="terminal-dot terminal-dot--red"></span>
+      <span class="terminal-dot terminal-dot--yellow"></span>
+      <span class="terminal-dot terminal-dot--green"></span>
+      <span class="terminal-title">~/my-app — zsh</span>
+      <div class="terminal-actions">
+        <button type="button" class="chip" data-replay aria-label="Replay terminal animation">↻</button>
+        <CopyButton text={`${installCommand} && ${initCommand}`} label="Copy install commands" />
+      </div>
+    </div>
+    <div
+      class="terminal-body"
+      role="img"
+      aria-label="Terminal running npm install -g engly, then engly init, which sets up Claude Code with the light coaching style."
+    >
+      {
+        terminalLines.map((line) => (
+          <div class={`term-line term-line--${line.kind}`} data-kind={line.kind}>
+            {line.kind === 'cmd' && <span class="term-prefix">$ </span>}
+            <span class="term-text">{line.text}</span>
+          </div>
+        ))
+      }
+      <div class="term-line term-line--cmd" data-kind="prompt">
+        <span class="term-prefix">$ </span><span class="term-text"></span>
+      </div>
+    </div>
+  </div>
+</section>

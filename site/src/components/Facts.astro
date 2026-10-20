@@ -1,0 +1,20 @@
+---
+import { facts } from '../data/content';
+---
+
+<div class="facts">
+  <ul aria-label="Project facts">
+    {
+      facts.map((fact) => (
+        <li class="pill">
+          {fact.accent && (
+            <>
+              <span class="accent">{fact.accent}</span>{' '}
+            </>
+          )}
+          {fact.label}
+        </li>
+      ))
+    }
+  </ul>
+</div>

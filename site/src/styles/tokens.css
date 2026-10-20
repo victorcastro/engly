@@ -1,0 +1,47 @@
+html {
+  --bg: oklch(0.155 0.012 70);
+  --bg2: oklch(0.185 0.014 70);
+  --card: oklch(0.2 0.016 70);
+  --line: oklch(0.3 0.02 70);
+  --fg: oklch(0.965 0.006 70);
+  --mut: oklch(0.76 0.02 70);
+  --acc: oklch(0.83 0.13 65);
+  --accbg: oklch(0.83 0.13 65 / 0.1);
+  --warm: oklch(0.85 0.12 95);
+  --ok: oklch(0.8 0.14 155);
+  --err: oklch(0.72 0.14 25);
+  --onacc: oklch(0.2 0.03 70);
+  --term: oklch(0.12 0.012 70);
+  --tline: oklch(0.27 0.02 70);
+  --tfg: oklch(0.93 0.01 70);
+  --tmut: oklch(0.7 0.02 70);
+  --tacc: oklch(0.83 0.13 65);
+  --tok: oklch(0.8 0.14 155);
+  --terr: oklch(0.72 0.14 25);
+  --twarm: oklch(0.85 0.12 95);
+  --bubble: oklch(0.2 0.016 70);
+  --sans: 'Geist Variable', system-ui, sans-serif;
+  --mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+  --max: 1160px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --section-gap: clamp(72px, 10vw, 120px);
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+
+html[data-theme='light'] {
+  --bg: oklch(0.985 0.004 70);
+  --bg2: oklch(0.965 0.007 70);
+  --card: oklch(0.995 0.002 70);
+  --line: oklch(0.89 0.012 70);
+  --fg: oklch(0.2 0.02 70);
+  --mut: oklch(0.45 0.02 70);
+  --acc: oklch(0.55 0.14 60);
+  --accbg: oklch(0.55 0.14 60 / 0.1);
+  --warm: oklch(0.52 0.11 95);
+  --ok: oklch(0.5 0.13 155);
+  --err: oklch(0.55 0.17 25);
+  --onacc: oklch(0.99 0.01 70);
+  color-scheme: light;
+}

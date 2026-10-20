@@ -1,0 +1,31 @@
+---
+import Agents from '../components/Agents.astro';
+import Demo from '../components/Demo.astro';
+import Facts from '../components/Facts.astro';
+import Faq from '../components/Faq.astro';
+import Features from '../components/Features.astro';
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Why from '../components/Why.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Engly — Your English coach for AI prompts"
+  description="Engly is an open source CLI that teaches the coding agent you already use to coach your English. No extra app, no API keys, no extra model."
+>
+  <Header />
+  <main id="top">
+    <Hero />
+    <Facts />
+    <Demo />
+    <Why />
+    <HowItWorks />
+    <Features />
+    <Agents />
+    <Faq />
+  </main>
+  <Footer />
+</Layout>

@@ -1,0 +1,30 @@
+---
+import { faq } from '../data/content';
+import SectionHead from './SectionHead.astro';
+---
+
+<section id="faq" class="section" aria-labelledby="faq-title">
+  <SectionHead id="faq-title" eyebrow="faq" title="Questions" wide />
+  <div class="faq-list">
+    {
+      faq.map((item, index) => (
+        <div class="faq-item">
+          <h3>
+            <button
+              type="button"
+              class="faq-q"
+              id={`faq-q${index}`}
+              aria-expanded={index === 0 ? 'true' : 'false'}
+              aria-controls={`faq-a${index}`}
+              data-faq
+            >
+              {item.question}
+              <span class="faq-icon" aria-hidden="true" />
+            </button>
+          </h3>
+          <div class="faq-a" id={`faq-a${index}`} role="region" aria-labelledby={`faq-q${index}`} hidden={index !== 0} set:html={item.answer} />
+        </div>
+      ))
+    }
+  </div>
+</section>

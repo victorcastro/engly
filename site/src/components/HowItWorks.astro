@@ -1,0 +1,35 @@
+---
+import { initCommand, installCommand } from '../data/content';
+import CopyButton from './CopyButton.astro';
+import SectionHead from './SectionHead.astro';
+
+const steps = [
+  { title: 'Install the CLI', command: installCommand },
+  { title: 'Run init in your project', command: initCommand, note: 'Choose your agents and coaching style.' },
+  { title: 'Open your agent', note: 'Write the way you always do. Coaching starts with your next prompt.' },
+];
+---
+
+<section id="how" class="section" aria-labelledby="how-title">
+  <SectionHead id="how-title" eyebrow="how it works" title="Three steps. Then just write." />
+  <ol class="steps stagger">
+    {
+      steps.map((step, index) => (
+        <li class="step">
+          <span class="step-num">{String(index + 1).padStart(2, '0')}</span>
+          <div class="step-text">
+            <h3>{step.title}</h3>
+            {step.note && <p>{step.note}</p>}
+          </div>
+          {step.command && (
+            <div class="cmd-box">
+              <span class="t-acc">$</span>
+              <code>{step.command}</code>
+              <CopyButton text={step.command} label={`Copy ${step.command}`} />
+            </div>
+          )}
+        </li>
+      ))
+    }
+  </ol>
+</section>
