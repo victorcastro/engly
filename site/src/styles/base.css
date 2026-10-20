@@ -121,3 +121,28 @@ button {
     opacity: 0;
   }
 }
+
+body::before,
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+}
+
+body::before {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--line) 55%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--line) 55%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 10%, transparent 80%);
+}
+
+body::after {
+  background: radial-gradient(ellipse 60% 45% at 50% -5%, color-mix(in oklab, var(--acc) 18%, transparent), transparent 70%);
+}
+
+html[data-theme='light'] body::after {
+  background: radial-gradient(ellipse 60% 45% at 50% -5%, color-mix(in oklab, var(--acc) 8%, transparent), transparent 70%);
+}
