@@ -1,6 +1,6 @@
 {
   "name": "engly",
-  "version": "1.7.0",
+  "version": "1.6.2",
   "description": "Your English coach for AI prompts. One command. Every agent. Always on.",
   "type": "module",
   "bin": {
