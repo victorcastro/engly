@@ -5,13 +5,37 @@
 }
 
 .demo-tabs .tab {
+  position: relative;
+  overflow: hidden;
   padding: 9px 14px;
 }
 
+.demo-tabs.is-auto .tab[aria-selected='true']::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--acc);
+  transform-origin: left;
+  animation: tab-progress 6s linear both;
+}
+
 .chat {
+  --claude: oklch(0.68 0.13 42);
+  --term: oklch(0.2 0.002 60);
+  --tline: oklch(0.32 0.002 60);
+  --tfg: oklch(0.96 0 0);
+  --tmut: oklch(0.7 0 0);
+  --bubble: oklch(0.27 0.002 60);
   font-family: var(--mono);
   font-size: 14px;
   line-height: 1.7;
+}
+
+.chat .t-warm {
+  color: var(--claude);
 }
 
 .chat-bar {
@@ -32,10 +56,9 @@
 }
 
 .chat-prompt {
-  padding: 12px 14px;
+  padding: 8px 14px;
   background: var(--bubble);
-  border: 1px solid var(--tline);
-  border-radius: 10px;
+  border-radius: 6px;
 }
 
 .chat-engly {
@@ -96,6 +119,10 @@
 
 .check {
   color: var(--ok);
+}
+
+.cross {
+  color: var(--err);
 }
 
 .steps {
@@ -197,97 +224,6 @@
 
 .status--ok {
   color: var(--ok);
-}
-
-.docs-grid {
-  display: grid;
-  grid-template-columns: minmax(200px, 260px) minmax(0, 1fr);
-  gap: clamp(24px, 4vw, 56px);
-  align-items: start;
-}
-
-.cmd-list {
-  flex-direction: column;
-  flex-wrap: nowrap;
-  gap: 0;
-  padding: 0;
-  border: 0;
-  border-left: 1px solid var(--line);
-  border-radius: 0;
-  background: transparent;
-}
-
-.cmd-tab {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin-left: -1px;
-  padding: 10px 14px;
-  border-left: 2px solid transparent;
-  border-radius: 0;
-  text-align: left;
-  font-family: var(--mono);
-}
-
-.cmd-tab[aria-selected='true'] {
-  background: transparent;
-  border-left-color: var(--acc);
-}
-
-.cmd-tag {
-  font-family: var(--sans);
-  font-size: 11px;
-  color: var(--mut);
-}
-
-.cmd-panel {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.cmd-desc {
-  font-size: 16px;
-  line-height: 1.55;
-  color: var(--fg);
-}
-
-.opts {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--line);
-}
-
-.opt {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
-  gap: 4px 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.opt code {
-  font-size: 13.5px;
-  color: var(--acc);
-}
-
-.opt span {
-  font-size: 14px;
-  color: var(--mut);
-  line-height: 1.5;
-}
-
-@media (max-width: 760px) {
-  .step,
-  .agent,
-  .docs-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .step-num {
-    grid-row: auto;
-  }
 }
 
 .faq-list {

@@ -9,7 +9,7 @@ import SectionHead from './SectionHead.astro';
     <div class="compare-col">
       <h3 class="compare-title">Other approaches</h3>
       <ul class="compare-list">
-        {comparison.others.map((item) => <li><span aria-hidden="true">✕</span>{item}</li>)}
+        {comparison.others.map((item) => <li><span aria-hidden="true" class="cross">✕</span>{item}</li>)}
       </ul>
     </div>
     <div class="compare-col compare-col--accent">

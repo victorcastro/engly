@@ -17,6 +17,12 @@
   }
 }
 
+@keyframes tab-progress {
+  from {
+    scale: 0 1;
+  }
+}
+
 @keyframes reveal {
   from {
     opacity: 0;
@@ -130,8 +136,7 @@
 }
 
 .faq-a,
-.chat-body,
-.cmd-panel {
+.chat-body {
   animation: drop-in 0.3s ease both;
 }
 

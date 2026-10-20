@@ -10,7 +10,7 @@ import SectionHead from './SectionHead.astro';
       you had written the better prompt.
     </p>
   </SectionHead>
-  <div class="tablist demo-tabs" role="tablist" aria-label="Demo scenarios" data-tabs>
+  <div class="tablist demo-tabs" role="tablist" aria-label="Demo scenarios" data-tabs data-autoplay>
     {
       demoTabs.map((label, index) => (
         <button
@@ -36,7 +36,7 @@ import SectionHead from './SectionHead.astro';
       </div>
       <div class="chat-engly">
         <span class="ln">┌ ✨ Engly</span>
-        <span class="ln">│ <span class="t-fg">Better: "Fix the login bug that blocks users when the password contains spaces."</span></span>
+        <span class="ln">│ <span class="t-hint">Better:</span> <span class="t-fg">"Fix the login bug that blocks users when the password contains spaces."</span></span>
         <span class="ln">└</span>
       </div>
       <div class="chat-agent">
@@ -47,13 +47,13 @@ import SectionHead from './SectionHead.astro';
 
     <div class="chat-body" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1" tabindex="0" hidden>
       <div class="chat-prompt">
-        <span class="t-mut">&gt; </span>make that the function return the users who has more than 3 orders
+        <span class="t-mut">&gt; </span><span class="t-err">make that the</span> function return the users <span class="t-err">who has</span> more than 3 orders
       </div>
       <div class="chat-engly">
         <span class="ln">┌ ✨ Engly</span>
-        <span class="ln">│ <span class="t-fg">• "make that the function return" → "make the function return"</span></span>
-        <span class="ln">│ <span class="t-fg">• "users who has" → "users who have" <span class="t-mut">(plural subject)</span></span></span>
-        <span class="ln">│ <span class="t-fg">Better: "Make the function return users with more than 3 orders."</span></span>
+        <span class="ln">│ <span class="t-fg">• <span class="t-err">"make that the function return"</span> → <span class="t-ok">"make the function return"</span></span></span>
+        <span class="ln">│ <span class="t-fg">• <span class="t-err">"users who has"</span> → <span class="t-ok">"users who have"</span> <span class="t-mut">(plural subject)</span></span></span>
+        <span class="ln">│ <span class="t-hint">Better:</span> <span class="t-fg">"Make the function return users with more than 3 orders."</span></span>
         <span class="ln">└</span>
       </div>
       <div class="chat-agent">

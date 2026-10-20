@@ -5,11 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.5.1] - 2026-10-20
+## [1.6.0] - 2026-10-20
 
 ### Added
 
-- Landing page in `site/`, deployed to GitHub Pages by the new `pages.yml` workflow on every change to `site/` on `main`.
+- Landing page in `site/`, built with Astro.
+- `pages.yml` workflow that deploys the landing page to GitHub Pages on every change to `site/` on `main`.
 
 ## [1.5.0] - 2026-09-27
 

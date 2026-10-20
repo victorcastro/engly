@@ -122,12 +122,6 @@
   color: var(--tfg);
 }
 
-.cmd-box--lg {
-  padding: 12px 12px 12px 16px;
-  border-radius: 10px;
-  font-size: 14px;
-}
-
 .cmd-box code {
   flex: 1;
   min-width: 0;

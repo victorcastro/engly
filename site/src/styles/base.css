@@ -95,6 +95,17 @@ button {
   color: var(--twarm);
 }
 
+.t-err {
+  color: var(--terr);
+  text-decoration: underline wavy;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+.t-hint {
+  color: var(--twarm);
+}
+
 .mono {
   font-family: var(--mono);
 }

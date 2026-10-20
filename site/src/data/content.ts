@@ -9,7 +9,6 @@ export const navLinks = [
   { href: '#features', label: 'Features' },
   { href: '#how', label: 'How it works' },
   { href: '#agents', label: 'Agents' },
-  { href: '#docs', label: 'Docs' },
   { href: '#faq', label: 'FAQ' },
 ];
 
@@ -89,42 +88,6 @@ export const agents: { name: string; available?: boolean; detail: string }[] = [
   { name: 'OpenCode', detail: 'Block in <code>AGENTS.md</code>' },
   { name: 'Cursor', detail: '<code>.cursor/rules/engly.mdc</code>' },
   { name: 'GitHub Copilot', detail: '<code>.github/copilot-instructions.md</code>' },
-];
-
-export const cliCommands: {
-  cmd: string;
-  desc: string;
-  opts: { flag: string; desc: string }[];
-  soon?: boolean;
-}[] = [
-  {
-    cmd: 'engly init',
-    desc: 'Set up Engly in the current project. Choose your agents and coaching style.',
-    opts: [
-      { flag: '--tools <list>', desc: 'Agents to configure, without prompting' },
-      { flag: '--style light|detailed', desc: 'Coaching style' },
-      { flag: '--yes', desc: 'Accept defaults, skip prompts' },
-      { flag: '--no-apply', desc: 'Write the config without applying it to agent files' },
-    ],
-  },
-  { cmd: 'engly update', desc: 'Refresh the instructions and skills to match the installed version.', opts: [] },
-  {
-    cmd: 'engly enable',
-    desc: 'Turn coaching on for this project, permanently. Use engly disable to turn it off.',
-    opts: [],
-  },
-  {
-    cmd: 'engly disable',
-    desc: 'Pause coaching for this project, permanently, until you run engly enable.',
-    opts: [],
-  },
-  { cmd: 'engly status', desc: 'Show the current configuration and which agents are set up.', opts: [] },
-  {
-    cmd: 'engly remove',
-    desc: 'Remove everything Engly added and leave your files as they were.',
-    opts: [{ flag: '--yes', desc: 'Skip the confirmation prompt' }],
-  },
-  { cmd: 'engly config <option> <value>', desc: 'Change a setting from the terminal.', opts: [], soon: true },
 ];
 
 export const faq: { question: string; answer: string }[] = [
