@@ -187,33 +187,62 @@
   font-size: 13px;
 }
 
+.agents-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+  gap: clamp(28px, 5vw, 64px);
+  align-items: center;
+}
+
+.agents-layout .section-head {
+  margin-bottom: 0;
+}
+
 .agent-list {
-  display: flex;
-  flex-direction: column;
-  border-top: 1px solid var(--line);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
 }
 
 .agent {
   display: grid;
-  grid-template-columns: minmax(120px, 200px) minmax(0, 1fr) auto;
-  gap: 8px 24px;
+  grid-template-columns: 8px minmax(100px, 130px) minmax(0, 1fr) auto;
+  gap: 16px;
   align-items: center;
-  padding: 16px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 14px 18px;
+  color: var(--mut);
+}
+
+.agent + .agent {
+  border-top: 1px solid var(--line);
+}
+
+.agent--active {
+  background: var(--accbg);
+  color: var(--fg);
+}
+
+.agent-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+}
+
+.agent--active .agent-dot {
+  background: var(--ok);
 }
 
 .agent h3 {
-  font-size: 16px;
+  font-size: 15px;
+  font-weight: 600;
+  color: inherit;
 }
 
-.agent--active h3 {
-  color: var(--acc);
-}
-
-.agent p {
-  font-size: 14px;
+.agent-file {
+  font-size: 13px;
   color: var(--mut);
-  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .status {
@@ -222,8 +251,24 @@
   color: var(--mut);
 }
 
-.status--ok {
+.agent--active .status {
   color: var(--ok);
+}
+
+@media (max-width: 760px) {
+  .step {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .agent {
+    grid-template-columns: 8px minmax(0, 1fr) auto;
+    gap: 6px 14px;
+  }
+
+  .agent-file {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
 }
 
 .faq-list {

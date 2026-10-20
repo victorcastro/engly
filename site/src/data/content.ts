@@ -82,12 +82,12 @@ export const features: { title: string; body: string }[] = [
   },
 ];
 
-export const agents: { name: string; available?: boolean; detail: string }[] = [
-  { name: 'Claude Code', available: true, detail: 'Import in <code>CLAUDE.md</code> or <code>AGENTS.md</code>' },
-  { name: 'Codex', detail: 'Block in <code>AGENTS.md</code>' },
-  { name: 'OpenCode', detail: 'Block in <code>AGENTS.md</code>' },
-  { name: 'Cursor', detail: '<code>.cursor/rules/engly.mdc</code>' },
-  { name: 'GitHub Copilot', detail: '<code>.github/copilot-instructions.md</code>' },
+export const agents: { name: string; file: string; available?: boolean }[] = [
+  { name: 'Claude Code', file: 'CLAUDE.md', available: true },
+  { name: 'Codex', file: 'AGENTS.md' },
+  { name: 'OpenCode', file: 'AGENTS.md' },
+  { name: 'Cursor', file: '.cursor/rules/engly.mdc' },
+  { name: 'GitHub Copilot', file: '.github/copilot-instructions.md' },
 ];
 
 export const faq: { question: string; answer: string }[] = [

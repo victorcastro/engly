@@ -44,7 +44,6 @@
 
 .section-lead code,
 .feature p code,
-.agent p code,
 .faq-a code {
   color: var(--fg);
 }

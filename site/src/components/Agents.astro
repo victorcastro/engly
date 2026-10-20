@@ -4,20 +4,21 @@ import SectionHead from './SectionHead.astro';
 ---
 
 <section id="agents" class="section" aria-labelledby="agents-title">
-  <SectionHead id="agents-title" eyebrow="supported agents" title="One command. Every agent.">
-    <p class="section-lead">Claude Code is supported today. The rest are on the way.</p>
-  </SectionHead>
-  <div class="agent-list stagger">
-    {
-      agents.map((agent) => (
-        <div class:list={['agent', { 'agent--active': agent.available }]}>
-          <h3>{agent.name}</h3>
-          <p set:html={agent.detail} />
-          <span class:list={['status', { 'status--ok': agent.available }]}>
-            {agent.available ? 'Available' : 'Coming soon'}
-          </span>
-        </div>
-      ))
-    }
+  <div class="agents-layout">
+    <SectionHead id="agents-title" eyebrow="supported agents" title="One command. Every agent.">
+      <p class="section-lead">Engly adds its instructions to the file your agent already reads.</p>
+    </SectionHead>
+    <ul class="agent-list stagger">
+      {
+        agents.map((agent) => (
+          <li class:list={['agent', { 'agent--active': agent.available }]}>
+            <span class="agent-dot" aria-hidden="true" />
+            <h3>{agent.name}</h3>
+            <code class="agent-file">{agent.file}</code>
+            <span class="status">{agent.available ? 'Available' : 'Soon'}</span>
+          </li>
+        ))
+      }
+    </ul>
   </div>
 </section>
