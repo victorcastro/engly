@@ -5,3 +5,23 @@ coverage/
 .DS_Store
 *.tgz
 .astro/
+
+# AI tools
+.engly/
+.claude/
+CLAUDE.md
+AGENTS.md
+GEMINI.md
+.cursor/
+.cursorrules
+.windsurf/
+.windsurfrules
+.aider*
+.codex/
+.gemini/
+.continue/
+.github/copilot-instructions.md
+.clinerules
+.cline/
+.roo/
+.kiro/
