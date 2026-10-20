@@ -30,14 +30,14 @@ export async function setEnabled(cwd: string, enabled: boolean): Promise<void> {
     return;
   }
 
+  config.enabled = enabled;
   for (const block of pending) {
-    const { text } = upsertBlock(block.text, blockContent(enabled), { version: config.version });
+    const { text } = upsertBlock(block.text, await blockContent(config, block.delivery), { version: config.version });
     await writeText(block.path, text);
   }
   if (enabled && !(await pathExists(join(cwd, INSTRUCTIONS_FILE)))) {
     await writeInstructions(cwd, config);
   }
-  config.enabled = enabled;
   await writeConfig(cwd, config);
 
   const where = pending.length > 0 ? ` in ${pending.map((block) => block.file).join(' and ')}` : '';

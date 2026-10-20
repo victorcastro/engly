@@ -30,11 +30,12 @@ export const terminalLines: { kind: TerminalKind; text: string }[] = [
   { kind: 'gap', text: '' },
   { kind: 'cmd', text: initCommand },
   { kind: 'brand', text: `✨ Engly ${pkg.version}` },
-  { kind: 'q', text: '? Agents to set up › Claude Code' },
+  { kind: 'q', text: '? Agents to set up › Claude Code, Codex' },
   { kind: 'q', text: '? Coaching style › light' },
   { kind: 'ok', text: '✓ Created .engly/config.json' },
   { kind: 'ok', text: '✓ Added skills engly-on, engly-off, engly-review' },
   { kind: 'ok', text: '✓ Linked .engly/engly.md in CLAUDE.md' },
+  { kind: 'ok', text: '✓ Added the coach to AGENTS.md' },
   { kind: 'out', text: 'Done. Open your agent and write as usual.' },
 ];
 
@@ -74,17 +75,17 @@ export const features: { title: string; body: string }[] = [
   },
   {
     title: 'Deep review',
-    body: '<code>/engly-review</code> numbers every mistake with an explanation, an improved version and a more formal alternative.',
+    body: '<code>/engly-review</code> (<code>$engly-review</code> in Codex) numbers every mistake with an explanation, an improved version and a more formal alternative.',
   },
   {
     title: 'Session controls',
-    body: '<code>/engly-off</code> and <code>/engly-on</code> in chat. <code>engly enable|disable</code> per project, permanently.',
+    body: '<code>/engly-off</code> and <code>/engly-on</code> in chat (<code>$engly-off</code>, <code>$engly-on</code> in Codex). <code>engly enable|disable</code> per project, permanently.',
   },
 ];
 
 export const agents: { name: string; file: string; available?: boolean }[] = [
   { name: 'Claude Code', file: 'CLAUDE.md', available: true },
-  { name: 'Codex', file: 'AGENTS.md' },
+  { name: 'Codex', file: 'AGENTS.md', available: true },
   { name: 'OpenCode', file: 'AGENTS.md' },
   { name: 'Cursor', file: '.cursor/rules/engly.mdc' },
   { name: 'GitHub Copilot', file: '.github/copilot-instructions.md' },
@@ -95,6 +96,11 @@ export const faq: { question: string; answer: string }[] = [
     question: 'Does it cost anything or send my prompts anywhere?',
     answer:
       'No. There is no server, no keys and no telemetry in the coaching. The CLI only checks npm once a day to let you know about new versions.',
+  },
+  {
+    question: 'Which agents does it work with?',
+    answer:
+      'Claude Code and Codex today. Pick them in <code>engly init</code> or pass <code>--tools claude,codex</code>. OpenCode, Cursor and GitHub Copilot are coming soon.',
   },
   { question: 'Will it slow me down?', answer: 'No. Feedback is a few lines and it never waits for confirmation.' },
   {

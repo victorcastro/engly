@@ -2,20 +2,28 @@ import { join } from 'node:path';
 import * as p from '@clack/prompts';
 import { adapters, detectTools, IMPLEMENTED_TOOLS, TOOL_IDS, type ToolId } from '../adapters/index.js';
 import { type BlockPosition, hasBlock, type UpsertAction, upsertBlock } from '../core/block.js';
-import { defaultConfig, readConfig, STYLES, type Style, writeConfig } from '../core/config.js';
+import { defaultConfig, type EnglyConfig, readConfig, STYLES, type Style, writeConfig } from '../core/config.js';
 import { readTextIfExists, writeText } from '../core/fs.js';
 import { gitStatus } from '../core/git.js';
 import { installSkills, writeInstructions } from '../core/install.js';
 import { SKILL_NAMES } from '../core/instructions.js';
 import { packageVersion } from '../core/paths.js';
-import { blockContent } from '../core/project.js';
+import { blockContent, candidateFiles, deliveryFor } from '../core/project.js';
 import { checkSize, type SizeReport } from '../core/size.js';
 
 export interface InitOptions {
   tools?: string;
   style?: string;
-  yes?: boolean;
   apply: boolean;
+}
+
+interface Target {
+  file: string;
+  path: string;
+  tools: ToolId[];
+  current: string | null;
+  text: string;
+  action: UpsertAction;
 }
 
 class CancelledError extends Error {}
@@ -40,48 +48,47 @@ export async function initCommand(options: InitOptions): Promise<void> {
 
 export async function runInit(options: InitOptions, cwd: string = process.cwd()): Promise<void> {
   const version = packageVersion();
-  const interactive = !options.yes;
+  const interactive = Boolean(process.stdin.isTTY);
 
-  if (interactive && !process.stdin.isTTY) {
-    throw new Error('No interactive terminal detected. Run "engly init --yes" to use the defaults.');
+  if (!interactive && !options.tools) {
+    throw new Error(
+      'No interactive terminal detected. Pass the agents with --tools, e.g. "engly init --tools claude,codex".',
+    );
   }
 
   p.intro(`Engly  v${version} – your English coach for AI prompts`);
 
   const config = (await readConfig(cwd, version)) ?? defaultConfig(version);
   config.version = version;
+  config.enabled = true;
 
   const tools = await chooseTools(cwd, options);
   if (tools.length === 0) {
     throw new Error(`No supported tool selected. Supported today: ${IMPLEMENTED_TOOLS.join(', ')}.`);
   }
 
-  config.style = await chooseStyle(options, config.style);
+  config.style = await chooseStyle(options, config.style, interactive);
 
-  const adapter = adapters.claude;
-  const agentFile = await adapter.instructionFile(cwd);
-  const agentPath = join(cwd, agentFile);
-  if (agentFile === 'AGENTS.md') {
-    p.log.info('No CLAUDE.md found. Using AGENTS.md, which Claude Code reads when there is no CLAUDE.md.');
+  const targets: Target[] = [];
+  if (options.apply) {
+    for (const [file, fileTools] of await groupByFile(cwd, tools)) {
+      if (file === 'AGENTS.md' && fileTools.includes('claude')) {
+        p.log.info('No CLAUDE.md found. Using AGENTS.md, which Claude Code reads when there is no CLAUDE.md.');
+      }
+      const target = await planTarget(cwd, file, fileTools, config, interactive);
+      if (target) targets.push(target);
+    }
   }
 
-  const current = await readTextIfExists(agentPath);
-  // Checked before any prompt or write, so broken markers fail early.
-  const blockExists = current !== null && hasBlock(current);
-
-  let apply = options.apply;
-  let position: BlockPosition = 'end';
-  if (apply && current !== null && !blockExists) {
-    const placement = await choosePlacement(agentFile, checkSize(current, adapter.sizeLimit), interactive);
-    if (placement === 'skip') apply = false;
-    else position = placement;
-  }
-  const planned = upsertBlock(current ?? '', blockContent(true), { version, position });
-
+  let apply = targets.length > 0;
   if (apply && interactive) {
+    const lines = targets.map(
+      (target) =>
+        `${target.file}  (${target.tools.map((tool) => adapters[tool].name).join(', ')})  → ${describePlan(target.current, target.action)}`,
+    );
     const choice = guard(
       await p.select({
-        message: `Add Engly block to:\n${agentFile}  (${adapter.name})  → ${describePlan(current, planned.action)}`,
+        message: `Add Engly block to:\n${lines.join('\n')}`,
         options: [
           { value: 'yes', label: 'Yes' },
           { value: 'skills', label: 'No, only install skills' },
@@ -92,7 +99,7 @@ export async function runInit(options: InitOptions, cwd: string = process.cwd())
   }
 
   if (apply) {
-    await warnIfInGit(cwd, agentFile, interactive);
+    for (const target of targets) await warnIfInGit(cwd, target.file, interactive);
   }
 
   const done: string[] = [];
@@ -100,23 +107,65 @@ export async function runInit(options: InitOptions, cwd: string = process.cwd())
   await writeInstructions(cwd, config);
 
   if (apply) {
-    await writeText(agentPath, planned.text);
-    done.push(`✓ ${agentFile} ${current === null ? 'created' : 'updated'}`);
+    for (const target of targets) {
+      await writeText(target.path, target.text);
+      done.push(`✓ ${target.file} ${target.current === null ? 'created' : 'updated'}`);
+    }
   }
 
   await installSkills(cwd, tools);
   done.push(`✓ Skills installed: ${SKILL_NAMES.join(', ')}`);
 
   config.tools = tools;
-  config.enabled = true;
   await writeConfig(cwd, config);
 
   p.log.success(done.join('\n'));
   p.outro(
     apply
       ? 'Done! Your next prompt will be coached.'
-      : `Skills installed. Run "engly init" again to add the Engly block to ${agentFile}.`,
+      : `Skills installed. Run "engly init" again to add the Engly block to ${(await candidateFiles(cwd, tools)).join(' or ')}.`,
   );
+}
+
+async function groupByFile(cwd: string, tools: readonly ToolId[]): Promise<Map<string, ToolId[]>> {
+  const groups = new Map<string, ToolId[]>();
+  for (const tool of tools) {
+    const file = await adapters[tool].instructionFile(cwd);
+    groups.set(file, [...(groups.get(file) ?? []), tool]);
+  }
+  return groups;
+}
+
+async function planTarget(
+  cwd: string,
+  file: string,
+  tools: ToolId[],
+  config: EnglyConfig,
+  interactive: boolean,
+): Promise<Target | null> {
+  const path = join(cwd, file);
+  const current = await readTextIfExists(path);
+  // Checked before any prompt or write, so broken markers fail early.
+  const blockExists = current !== null && hasBlock(current);
+
+  let position: BlockPosition = 'end';
+  if (current !== null && !blockExists) {
+    const placement = await choosePlacement(file, sizeReport(current, tools), interactive);
+    if (placement === 'skip') return null;
+    position = placement;
+  }
+
+  const content = await blockContent(config, deliveryFor(file, tools));
+  const planned = upsertBlock(current ?? '', content, { version: config.version, position });
+  return { file, path, tools, current, text: planned.text, action: planned.action };
+}
+
+function sizeReport(text: string, tools: readonly ToolId[]): SizeReport | null {
+  for (const tool of tools) {
+    const report = checkSize(text, adapters[tool].sizeLimit);
+    if (report) return report;
+  }
+  return null;
 }
 
 async function chooseTools(cwd: string, options: InitOptions): Promise<ToolId[]> {
@@ -133,10 +182,6 @@ async function chooseTools(cwd: string, options: InitOptions): Promise<ToolId[]>
   }
 
   const detected = await detectTools(cwd);
-  const initial = detected.filter((tool) => IMPLEMENTED_TOOLS.includes(tool));
-  const defaults = initial.length > 0 ? initial : [...IMPLEMENTED_TOOLS];
-
-  if (options.yes) return defaults;
 
   return guard(
     await p.multiselect<ToolId>({
@@ -144,10 +189,9 @@ async function chooseTools(cwd: string, options: InitOptions): Promise<ToolId[]>
       options: TOOL_IDS.map((id) => ({
         value: id,
         label: adapters[id].name,
-        hint: IMPLEMENTED_TOOLS.includes(id) ? undefined : 'coming soon',
+        hint: !IMPLEMENTED_TOOLS.includes(id) ? 'coming soon' : detected.includes(id) ? 'detected' : undefined,
         disabled: !IMPLEMENTED_TOOLS.includes(id),
       })),
-      initialValues: defaults,
       required: true,
     }),
   );
@@ -161,14 +205,14 @@ function keepImplemented(tools: ToolId[]): ToolId[] {
   return tools.filter((tool) => IMPLEMENTED_TOOLS.includes(tool));
 }
 
-async function chooseStyle(options: InitOptions, current: Style): Promise<Style> {
+async function chooseStyle(options: InitOptions, current: Style, interactive: boolean): Promise<Style> {
   if (options.style) {
     if (!(STYLES as readonly string[]).includes(options.style)) {
       throw new Error(`Invalid style "${options.style}". Use: ${STYLES.join(', ')}.`);
     }
     return options.style as Style;
   }
-  if (options.yes) return current;
+  if (!interactive) return current;
 
   return guard(
     await p.select<Style>({

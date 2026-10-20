@@ -5,6 +5,23 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.7.0] - 2026-10-20
+
+### Added
+
+- Codex support. `engly init --tools codex` writes the Engly block in `AGENTS.md` and installs the skills in `.agents/skills/`. Codex can't follow `@` imports, so the block holds the full coach instructions; `engly update` regenerates them from your settings.
+- With Claude Code and Codex together, a shared `AGENTS.md` gets a single block with the full instructions, and `CLAUDE.md` keeps its `@.engly/engly.md` import.
+- `engly status` warns when the instructions written in `AGENTS.md` no longer match `.engly/config.json`.
+
+### Changed
+
+- `engly init` never picks the agents for you: choose them in the list (detected agents are marked) or pass `--tools`. Without a terminal, `--tools` is required.
+- Landing page and README list Codex as available.
+
+### Removed
+
+- `engly init --yes`.
+
 ## [1.6.2] - 2026-10-20
 
 ### Added

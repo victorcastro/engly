@@ -4,8 +4,9 @@ import { adapters, type ToolId } from '../adapters/index.js';
 import { ConfigError, type EnglyConfig, readConfig } from '../core/config.js';
 import { pathExists } from '../core/fs.js';
 import { hasInstalledSkills, skillStatus } from '../core/install.js';
+import { renderInstructions } from '../core/instructions.js';
 import { CONFIG_FILE, INSTRUCTIONS_FILE, packageVersion } from '../core/paths.js';
-import { type AgentFile, candidateFiles, configuredTools, inspectAgentFiles } from '../core/project.js';
+import { type AgentFile, candidateFiles, configuredTools, inspectAgentFiles, isOutdated } from '../core/project.js';
 import { checkSize } from '../core/size.js';
 
 export async function statusCommand(): Promise<void> {
@@ -110,8 +111,18 @@ async function collectWarnings(input: WarningInput): Promise<string[]> {
     );
   }
 
-  if (active && !(await pathExists(join(cwd, INSTRUCTIONS_FILE)))) {
+  const imports = withBlock.some((file) => file.state === 'active' && file.delivery === 'import');
+  if (imports && !(await pathExists(join(cwd, INSTRUCTIONS_FILE)))) {
     warnings.push(`${INSTRUCTIONS_FILE} is missing, but the block imports it. Run "engly update".`);
+  }
+
+  if (config) {
+    const instructions = await renderInstructions(config);
+    for (const file of withBlock) {
+      if (file.delivery === 'embedded' && isOutdated(file, instructions)) {
+        warnings.push(`The Engly block in ${file.file} does not match your settings. Run "engly update".`);
+      }
+    }
   }
 
   for (const folder of skills) {

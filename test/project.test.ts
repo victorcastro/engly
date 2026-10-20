@@ -7,9 +7,11 @@ import {
   blockContent,
   candidateFiles,
   configuredTools,
+  deliveryFor,
   findBlocks,
   inspectAgentFile,
   inspectAgentFiles,
+  isOutdated,
 } from '../src/core/project.js';
 
 let root: string;
@@ -31,9 +33,40 @@ const ACTIVE = '# Title\n\n<!-- engly:start v1.0.0 -->\n@.engly/engly.md\n<!-- e
 const EMPTY = '# Title\n\n<!-- engly:start v1.0.0 -->\n<!-- engly:end -->\n';
 
 describe('blockContent', () => {
-  it('imports the instructions when enabled and is empty when disabled', () => {
-    expect(blockContent(true)).toBe('@.engly/engly.md');
-    expect(blockContent(false)).toBe('');
+  const enabled = defaultConfig('1.0.0');
+  const disabled = { ...enabled, enabled: false };
+
+  it('imports the instructions when enabled and is empty when disabled', async () => {
+    expect(await blockContent(enabled, 'import')).toBe('@.engly/engly.md');
+    expect(await blockContent(disabled, 'import')).toBe('');
+  });
+
+  it('embeds the instructions when enabled and is empty when disabled', async () => {
+    expect(await blockContent(enabled, 'embedded')).toContain('Engly – English coach');
+    expect(await blockContent(disabled, 'embedded')).toBe('');
+  });
+});
+
+describe('deliveryFor', () => {
+  it('imports for Claude Code alone', () => {
+    expect(deliveryFor('CLAUDE.md', ['claude'])).toBe('import');
+    expect(deliveryFor('AGENTS.md', ['claude'])).toBe('import');
+  });
+
+  it('embeds in AGENTS.md as soon as Codex reads it', () => {
+    expect(deliveryFor('AGENTS.md', ['codex'])).toBe('embedded');
+    expect(deliveryFor('AGENTS.md', ['claude', 'codex'])).toBe('embedded');
+    expect(deliveryFor('CLAUDE.md', ['claude', 'codex'])).toBe('import');
+  });
+});
+
+describe('isOutdated', () => {
+  it('compares an active block with the expected content, ignoring line endings', async () => {
+    const file = { ...(await inspectAgentFile(root, 'AGENTS.md')), state: 'active' as const };
+    file.text = '<!-- engly:start v1.0.0 -->\r\nline one\r\nline two\r\n<!-- engly:end -->\r\n';
+    expect(isOutdated(file, 'line one\nline two\n')).toBe(false);
+    expect(isOutdated(file, 'line one\n')).toBe(true);
+    expect(isOutdated({ ...file, state: 'inactive' }, 'line one\n')).toBe(false);
   });
 });
 
@@ -70,8 +103,13 @@ describe('candidateFiles', () => {
     expect(await candidateFiles(root, ['claude'])).toEqual(['CLAUDE.md', 'AGENTS.md']);
   });
 
+  it('lists AGENTS.md once for Claude Code and Codex', async () => {
+    expect(await candidateFiles(root, ['claude', 'codex'])).toEqual(['CLAUDE.md', 'AGENTS.md']);
+    expect(await candidateFiles(root, ['codex'])).toEqual(['AGENTS.md']);
+  });
+
   it('ignores tools that are not implemented yet', async () => {
-    expect(await candidateFiles(root, ['codex', 'cursor'])).toEqual([]);
+    expect(await candidateFiles(root, ['opencode', 'cursor'])).toEqual([]);
   });
 });
 
@@ -111,11 +149,14 @@ describe('inspectAgentFiles and findBlocks', () => {
 
 describe('configuredTools', () => {
   it('keeps the implemented tools of the config', () => {
-    expect(configuredTools({ ...defaultConfig('1.0.0'), tools: ['claude', 'codex'] })).toEqual(['claude']);
+    expect(configuredTools({ ...defaultConfig('1.0.0'), tools: ['claude', 'codex', 'cursor'] })).toEqual([
+      'claude',
+      'codex',
+    ]);
   });
 
   it('falls back to the implemented tools without a config or tools', () => {
-    expect(configuredTools(null)).toEqual(['claude']);
-    expect(configuredTools({ ...defaultConfig('1.0.0'), tools: ['codex'] })).toEqual(['claude']);
+    expect(configuredTools(null)).toEqual(['claude', 'codex']);
+    expect(configuredTools({ ...defaultConfig('1.0.0'), tools: ['cursor'] })).toEqual(['claude', 'codex']);
   });
 });
