@@ -8,7 +8,7 @@ import SectionHead from './SectionHead.astro';
   <div class="feature-grid stagger">
     {
       features.map((feature) => (
-        <article class="card feature">
+        <article class="feature">
           <h3>{feature.title}</h3>
           <p set:html={feature.body} />
         </article>

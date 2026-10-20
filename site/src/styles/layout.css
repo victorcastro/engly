@@ -43,9 +43,8 @@
 }
 
 .section-lead code,
-.card p code,
+.feature p code,
 .agent p code,
-.check-list code,
 .faq-a code {
   color: var(--fg);
 }
@@ -134,22 +133,6 @@
   min-width: 0;
   overflow-x: auto;
   white-space: nowrap;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--card);
-}
-
-.card h3 {
-  letter-spacing: -0.01em;
-}
-
-.card p code {
-  font-size: 13px;
 }
 
 .tablist {

@@ -15,9 +15,12 @@ const steps = [
   <ol class="steps stagger">
     {
       steps.map((step, index) => (
-        <li class="card step">
+        <li class="step">
           <span class="step-num">{String(index + 1).padStart(2, '0')}</span>
-          <h3>{step.title}</h3>
+          <div class="step-text">
+            <h3>{step.title}</h3>
+            {step.note && <p>{step.note}</p>}
+          </div>
           {step.command && (
             <div class="cmd-box">
               <span class="t-acc">$</span>
@@ -25,7 +28,6 @@ const steps = [
               <CopyButton text={step.command} label={`Copy ${step.command}`} />
             </div>
           )}
-          {step.note && <p>{step.note}</p>}
         </li>
       ))
     }

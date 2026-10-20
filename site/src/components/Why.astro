@@ -6,13 +6,13 @@ import SectionHead from './SectionHead.astro';
 <section class="section" aria-labelledby="why-title">
   <SectionHead id="why-title" eyebrow="why engly" title="Practice English with the work you already do" />
   <div class="compare stagger">
-    <div class="compare-card">
+    <div class="compare-col">
       <h3 class="compare-title">Other approaches</h3>
       <ul class="compare-list">
         {comparison.others.map((item) => <li><span aria-hidden="true">✕</span>{item}</li>)}
       </ul>
     </div>
-    <div class="compare-card compare-card--accent">
+    <div class="compare-col compare-col--accent">
       <h3 class="compare-title">✨ Engly</h3>
       <ul class="compare-list">
         {comparison.engly.map((item) => <li><span aria-hidden="true" class="check">✓</span>{item}</li>)}

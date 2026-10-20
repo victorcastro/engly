@@ -127,33 +127,6 @@ export const cliCommands: {
   { cmd: 'engly config <option> <value>', desc: 'Change a setting from the terminal.', opts: [], soon: true },
 ];
 
-export const settingsRows = [
-  { key: 'style', values: 'light | detailed', fallback: 'light' },
-  { key: 'level', values: 'auto | A2 | B1 | B2 | C1', fallback: 'auto' },
-  { key: 'language', values: 'auto | your native language', fallback: 'auto' },
-  { key: 'reviewEnglish', values: 'true | false', fallback: 'true' },
-  { key: 'enabled', values: 'true | false', fallback: 'true' },
-];
-
-export const configPreview: { key: string; value: string; tone: 'warm' | 'ok' }[] = [
-  { key: 'style', value: '"light"', tone: 'warm' },
-  { key: 'level', value: '"auto"', tone: 'warm' },
-  { key: 'language', value: '"auto"', tone: 'warm' },
-  { key: 'reviewEnglish', value: 'true', tone: 'ok' },
-  { key: 'enabled', value: 'true', tone: 'ok' },
-];
-
-export const configJson = `{\n${configPreview.map((row) => `  "${row.key}": ${row.value}`).join(',\n')}\n}`;
-
-export const agentBlock = '<!-- engly:start -->\n@.engly/engly.md\n<!-- engly:end -->';
-
-export const safeGuarantees = [
-  'Everything else stays intact, down to the line breaks.',
-  'Warns you if your agent file is tracked in git. Learning English is personal.',
-  'Offers to move the block to the top if the file is long.',
-  '<code>engly remove</code> leaves everything exactly as it was.',
-];
-
 export const faq: { question: string; answer: string }[] = [
   {
     question: 'Does it cost anything or send my prompts anywhere?',

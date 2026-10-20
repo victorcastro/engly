@@ -9,9 +9,9 @@ import { navLinks, repoUrl } from '../data/content';
       {navLinks.map((link) => <a href={link.href}>{link.label}</a>)}
     </div>
     <div class="nav-actions">
-      <button type="button" class="icon-btn" data-theme-toggle aria-label="Switch to light theme">
-        <span class="theme-icon theme-icon--dark" aria-hidden="true">☀</span>
-        <span class="theme-icon theme-icon--light" aria-hidden="true">☾</span>
+      <button type="button" class="icon-btn theme-btn" data-theme-toggle aria-label="Switch to light theme">
+        <span class="theme-face" aria-hidden="true"><span class="i-sun">☀</span><span class="i-moon">☾</span></span>
+        <span class="theme-next" aria-hidden="true"><span class="i-sun">☀</span><span class="i-moon">☾</span></span>
       </button>
       <a href={repoUrl} class="btn btn--outline nav-star"><span aria-hidden="true" class="star">★</span>Star on GitHub</a>
       <a href="#how" class="btn btn--primary">Get started</a>

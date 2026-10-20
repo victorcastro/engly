@@ -10,6 +10,8 @@ if (root) {
   cursor.className = 'term-cursor';
   cursor.setAttribute('aria-hidden', 'true');
 
+  const LOOP_PAUSE = 2000;
+
   let timer: number | undefined;
   let step = 0;
   let chars = 0;
@@ -42,7 +44,7 @@ if (root) {
     step += 1;
     chars = 0;
     render();
-    timer = window.setTimeout(tick, delay);
+    timer = window.setTimeout(step >= typed.length ? start : tick, step >= typed.length ? LOOP_PAUSE : delay);
   };
 
   const start = () => {
