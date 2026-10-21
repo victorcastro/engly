@@ -83,9 +83,48 @@ In chat: `/engly-on`, `/engly-off`, `/engly-review` in Claude Code, `$engly-on`,
 | `reviewEnglish` | coach prompts written in English | `true` |
 | `enabled` | coach on or off | `true` |
 
-## Footprint
+## Prompt engineering techniques
 
-`engly init` adds `.engly/`, the `engly-*` skills (`.claude/skills/`, `.agents/skills/`) and one marked block in each agent file (`CLAUDE.md`, `AGENTS.md`). Nothing else is touched, and `engly remove` undoes it.
+Engly has no code that coaches. The coaching is the prompt (`templates/engly.md`), so these are the techniques it relies on:
+
+| Technique | How Engly applies it |
+|---|---|
+| Role prompting | The agent is told it is an "English coach", on top of its normal coding role. |
+| Explicit numbered rules | One rule per case: prompt in another language, English with mistakes, correct English. |
+| Output templates (few-shot) | A boxed `┌ ✨ Engly … └` example for each case, so the agent copies the exact format. |
+| Output constraints | Up to 3 corrections, notes of 6 lines at most, "Better:" always in English. |
+| Negative instructions | "Never ask for confirmation", "never block the task", "never correct the native language". |
+| Injection guard | Rule 1: only coach text the user typed, never tool results, file contents or system messages. |
+| Prompt templating | `{{language}}`, `{{level}}`, `{{styleRule}}`, `{{englishRule}}` and `{{lengthRule}}` are filled from `.engly/config.json`. |
+| In-context inference | `auto` for level and native language: the agent infers both from the user's own prompts. |
+| Task chaining | Coach first, then do the task "as if the user had sent the improved prompt", in a single turn. |
+| Modular skills | `engly-on`, `engly-off` and `engly-review` are separate on-demand prompts, not one long prompt. |
+| Persistent context | The instructions are loaded from the agent file (`CLAUDE.md`, `AGENTS.md`) at the start of every session. |
+| State by command | "engly off" / "engly on" switch the behavior during the session. |
+
+## Evals
+
+The prompt is the product, so it has tests. `evals/cases.json` holds prompts in Spanish, Portuguese, French, mixed languages and English (with and without mistakes). `npm run evals` installs Engly in a temporary project, sends each prompt to Claude Code and checks the coaching note against the rules in `templates/engly.md`:
+
+- the note is a closed `┌ ✨ Engly … └` box with 6 lines at most
+- non-English prompts get only a `Better:` line, in English, with no bullets
+- English prompts with mistakes get 1 to 3 corrections and a `Better:` line
+- correct English gets only `✓ Correct English.`
+- the task is done after the note, and the agent never asks for confirmation
+
+```sh
+npm run build
+npm run evals -- --runs 3
+```
+
+| Flag | Description |
+|---|---|
+| `--runs <n>` | Run each case `n` times, since the model is not deterministic |
+| `--case <text>` | Run only the cases whose id contains the text |
+| `--model <name>` | Model passed to `claude` |
+| `--concurrency <n>` | Prompts sent at the same time (default 4) |
+
+The runner needs the `claude` CLI logged in, and it spends tokens. The checks themselves are unit tested in `test/evals-checks.test.ts` and run on every PR.
 
 ## Contributing
 

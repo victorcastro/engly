@@ -5,6 +5,17 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.0] - 2026-10-20
+
+### Added
+
+- Prompt evals in `evals/`. `npm run evals` installs Engly in a temporary project, sends a set of prompts to Claude Code and checks the coaching note against the rules in `templates/engly.md`. Flags: `--runs`, `--case`, `--model`, `--concurrency`.
+- README section listing the prompt engineering techniques Engly uses and how each one is applied.
+
+### Removed
+
+- "Footprint" section from the README.
+
 ## [1.7.0] - 2026-10-20
 
 ### Added

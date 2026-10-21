@@ -4,7 +4,7 @@ export default defineConfig({
   test: {
     include: ['test/**/*.test.ts'],
     coverage: {
-      include: ['src/**/*.ts', 'scripts/**/*.mjs'],
+      include: ['src/**/*.ts', 'scripts/**/*.mjs', 'evals/checks.mjs'],
       thresholds: {
         'src/core/block.ts': { 100: true },
         'src/core/size.ts': { 100: true },

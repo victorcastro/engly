@@ -1,0 +1,47 @@
+[
+  { "id": "es-function", "kind": "translate", "prompt": "escribe una funcion en javascript que sume dos numeros" },
+  { "id": "es-closure", "kind": "translate", "prompt": "explicame que es un closure en una sola frase" },
+  {
+    "id": "es-typos",
+    "kind": "translate",
+    "prompt": "ayudame a esplicar como funciona un array en python, tengo muxos herrores"
+  },
+  { "id": "pt-closure", "kind": "translate", "prompt": "explique em uma frase o que é um closure em JavaScript" },
+  {
+    "id": "fr-reverse",
+    "kind": "translate",
+    "prompt": "écris une fonction python qui inverse une chaîne de caractères"
+  },
+  { "id": "mixed-one-word", "kind": "mixed", "prompt": "Write a function that suma two numbers in JavaScript." },
+  {
+    "id": "en-one-error",
+    "kind": "corrections",
+    "prompt": "Write a function that return the sum of two numbers in JavaScript."
+  },
+  {
+    "id": "en-two-errors",
+    "kind": "corrections",
+    "prompt": "Explain me how closures works in JavaScript in one sentence."
+  },
+  {
+    "id": "en-many-errors",
+    "kind": "corrections",
+    "prompt": "Yesterday I am go to the office and I fix the bug who was breaking the buid, can you explain me why it happen in one sentence?"
+  },
+  {
+    "id": "en-false-friend",
+    "kind": "corrections",
+    "prompt": "Make a resume of what a closure is in JavaScript in one sentence."
+  },
+  {
+    "id": "en-correct-function",
+    "kind": "correct",
+    "prompt": "Write a function that returns the sum of two numbers in JavaScript."
+  },
+  {
+    "id": "en-correct-question",
+    "kind": "correct",
+    "prompt": "What does a closure do in JavaScript? Answer in one sentence."
+  },
+  { "id": "en-correct-explain", "kind": "correct", "prompt": "Explain what an array is in Python in one sentence." }
+]
