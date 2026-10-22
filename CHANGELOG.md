@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Open Graph and Twitter card image (`og.png`, 1200x630) on the landing page, so links shared on social media show a preview.
 - Favicon set: `favicon.ico` and `apple-touch-icon.png`.
-- Google Analytics (gtag.js) on the landing page, loaded only in production builds.
+- Google Analytics (gtag.js) on the landing page. It loads only in production builds, with the measurement ID read from the `PUBLIC_GA_ID` repository variable.
 - Event tracking on the landing page: `copy_command`, `cta_click`, `link_click`, `nav_click`, `section_view`, `demo_tab_select`, `faq_toggle`, `theme_toggle` and `terminal_replay`.
 
 ### Changed

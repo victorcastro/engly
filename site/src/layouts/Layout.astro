@@ -17,6 +17,13 @@ interface Props {
 const { title, description } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const ogImage = `${Astro.site?.origin ?? ''}${base}/og.png`;
+const gaId = import.meta.env.PUBLIC_GA_ID;
+const gtagSetup = `window.dataLayer = window.dataLayer || [];
+function gtag() {
+  dataLayer.push(arguments);
+}
+gtag('js', new Date());
+gtag('config', '${gaId}');`;
 ---
 
 <!doctype html>
@@ -40,17 +47,10 @@ const ogImage = `${Astro.site?.origin ?? ''}${base}/og.png`;
     <link rel="icon" href="favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     {
-      import.meta.env.PROD && (
+      import.meta.env.PROD && gaId && (
         <>
-          <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NLXW6HEELE" />
-          <script is:inline>
-            window.dataLayer = window.dataLayer || [];
-            function gtag() {
-              dataLayer.push(arguments);
-            }
-            gtag('js', new Date());
-            gtag('config', 'G-NLXW6HEELE');
-          </script>
+          <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`} />
+          <script is:inline set:html={gtagSetup} />
         </>
       )
     }
