@@ -11,6 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Open Graph and Twitter card image (`og.png`, 1200x630) on the landing page, so links shared on social media show a preview.
 - Favicon set: `favicon.ico` and `apple-touch-icon.png`.
+- Google Analytics (gtag.js) on the landing page.
 
 ### Changed
 

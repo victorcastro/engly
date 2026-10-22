@@ -39,6 +39,15 @@ const ogImage = `${Astro.site?.origin ?? ''}${base}/og.png`;
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-NLXW6HEELE"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-NLXW6HEELE');
+    </script>
     <script is:inline>
       document.documentElement.classList.add('js');
       try {
