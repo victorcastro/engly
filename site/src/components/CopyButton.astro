@@ -2,9 +2,18 @@
 interface Props {
   text: string;
   label?: string;
+  location: string;
 }
 
-const { text, label } = Astro.props;
+const { text, label, location } = Astro.props;
 ---
 
-<button type="button" class="chip" data-copy={text} aria-label={label}>Copy</button>
+<button
+  type="button"
+  class="chip"
+  data-copy={text}
+  data-track="copy_command"
+  data-track-command={text}
+  data-track-location={location}
+  aria-label={label}>Copy</button
+>

@@ -3,7 +3,7 @@ import { initCommand, installCommand, repoUrl, terminalLines } from '../data/con
 import CopyButton from './CopyButton.astro';
 ---
 
-<section class="hero" aria-labelledby="hero-title">
+<section class="hero" aria-labelledby="hero-title" data-section="hero">
   <div class="hero-copy">
     <span class="badge"><span class="pulse-dot"></span>Open source · MIT</span>
     <h1 id="hero-title">Improve <span class="accent">your English</span> while you code with AI.</h1>
@@ -11,8 +11,8 @@ import CopyButton from './CopyButton.astro';
       Engly teaches the coding agent you already use to coach your English. No extra app, no API keys, no extra model.
     </p>
     <div class="hero-actions">
-      <a href="#how" class="btn btn--lg btn--primary">Get started</a>
-      <a href={repoUrl} class="btn btn--lg btn--outline">View on GitHub <span aria-hidden="true">→</span></a>
+      <a href="#how" class="btn btn--lg btn--primary" data-track="cta_click" data-track-cta="get_started" data-track-location="hero">Get started</a>
+      <a href={repoUrl} class="btn btn--lg btn--outline" data-track="cta_click" data-track-cta="view_github" data-track-location="hero">View on GitHub <span aria-hidden="true">→</span></a>
     </div>
     <p class="hero-note">Works today with Claude Code and Codex · more agents soon</p>
   </div>
@@ -24,8 +24,8 @@ import CopyButton from './CopyButton.astro';
       <span class="terminal-dot terminal-dot--green"></span>
       <span class="terminal-title">~/my-app — zsh</span>
       <div class="terminal-actions">
-        <button type="button" class="chip" data-replay aria-label="Replay terminal animation">↻</button>
-        <CopyButton text={`${installCommand} && ${initCommand}`} label="Copy install commands" />
+        <button type="button" class="chip" data-replay data-track="terminal_replay" aria-label="Replay terminal animation">↻</button>
+        <CopyButton text={`${installCommand} && ${initCommand}`} label="Copy install commands" location="hero" />
       </div>
     </div>
     <div

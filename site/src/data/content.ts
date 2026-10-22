@@ -17,7 +17,7 @@ export const facts = [
   { label: `Node ${pkg.engines.node.replace('>=', '≥ ')}` },
   { label: `v${pkg.version}` },
   { accent: '0', label: 'API keys' },
-  { accent: '0', label: 'telemetry' },
+  { accent: '0', label: 'CLI telemetry' },
   { label: 'Levels A2–C1' },
   { label: 'Any native language' },
 ];
