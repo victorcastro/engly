@@ -109,6 +109,7 @@ jobs:
         env:
           SITE_URL: ${{ steps.pages.outputs.origin }}
           BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          PUBLIC_GA_ID: ${{ vars.PUBLIC_GA_ID }}
       - uses: actions/upload-pages-artifact@v5
         with:
           path: site/dist

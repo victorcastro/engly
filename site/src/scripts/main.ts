@@ -4,3 +4,4 @@ import './tabs';
 import './copy';
 import './faq';
 import './terminal';
+import './analytics';

@@ -10,7 +10,7 @@ const steps = [
 ];
 ---
 
-<section id="how" class="section" aria-labelledby="how-title">
+<section id="how" class="section" aria-labelledby="how-title" data-section="how">
   <SectionHead id="how-title" eyebrow="how it works" title="Three steps. Then just write." />
   <ol class="steps stagger">
     {
@@ -25,7 +25,7 @@ const steps = [
             <div class="cmd-box">
               <span class="t-acc">$</span>
               <code>{step.command}</code>
-              <CopyButton text={step.command} label={`Copy ${step.command}`} />
+              <CopyButton text={step.command} label={`Copy ${step.command}`} location="how_it_works" />
             </div>
           )}
         </li>

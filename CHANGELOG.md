@@ -5,6 +5,20 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.8.1] - 2026-10-22
+
+### Added
+
+- Open Graph and Twitter card image (`og.png`, 1200x630) on the landing page, so links shared on social media show a preview.
+- Favicon set: `favicon.ico` and `apple-touch-icon.png`.
+- Google Analytics (gtag.js) on the landing page. It loads only in production builds, with the measurement ID read from the `PUBLIC_GA_ID` repository variable.
+- Event tracking on the landing page: `copy_command`, `cta_click`, `link_click`, `nav_click`, `section_view`, `demo_tab_select`, `faq_toggle`, `theme_toggle` and `terminal_replay`.
+
+### Changed
+
+- `favicon.svg` is now a vector logo in the brand amber instead of the sparkles emoji, so it looks the same on every system.
+- The "0 telemetry" fact on the landing page now reads "0 CLI telemetry".
+
 ## [1.8.0] - 2026-10-20
 
 ### Added
