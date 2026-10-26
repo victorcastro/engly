@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @font-face {
+        font-family: 'Geist';
+        src: url('{{GEIST}}') format('woff2');
+        font-weight: 100 900;
+      }
+      @font-face {
+        font-family: 'JetBrains Mono';
+        src: url('{{MONO}}') format('woff2');
+        font-weight: 100 800;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html,
+      body {
+        width: 1200px;
+        height: 630px;
+        overflow: hidden;
+      }
+      body {
+        --bg: oklch(0.155 0.012 70);
+        --fg: oklch(0.965 0.006 70);
+        --mut: oklch(0.76 0.02 70);
+        --acc: oklch(0.83 0.13 65);
+        --term: oklch(0.12 0.012 70);
+        --tline: oklch(0.3 0.02 70);
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 64px 80px;
+        background:
+          radial-gradient(ellipse 700px 420px at 100% 100%, oklch(0.83 0.13 65 / 0.18), transparent 70%),
+          var(--bg);
+        color: var(--fg);
+        font-family: 'Geist', system-ui, sans-serif;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        font-size: 40px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .brand svg {
+        width: 48px;
+        height: 48px;
+      }
+      h1 {
+        max-width: 1040px;
+        font-size: 88px;
+        font-weight: 700;
+        line-height: 1.04;
+        letter-spacing: -0.035em;
+      }
+      h1 span {
+        color: var(--acc);
+      }
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .cmd {
+        display: inline-flex;
+        align-items: center;
+        gap: 18px;
+        padding: 20px 32px;
+        border: 2px solid var(--tline);
+        border-radius: 18px;
+        background: var(--term);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 38px;
+        font-weight: 500;
+      }
+      .cmd b {
+        color: var(--acc);
+        font-weight: 500;
+      }
+      .tag {
+        color: var(--mut);
+        font-size: 28px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="brand">
+      <svg viewBox="0 0 32 32" fill="#FFB567" xmlns="http://www.w3.org/2000/svg">
+        <path d="M21.334 1.03125C21.334 9.19566 25.7462 16.5 31.9688 16.5C25.7462 16.5 21.334 23.8049 21.334 31.9688C21.334 23.8049 16.9218 16.5 10.6992 16.5C16.9218 16.5 21.334 9.19566 21.334 1.03125Z" />
+        <path d="M8.76634 16.5C8.76634 20.5827 10.9717 24.2344 14.084 24.2344C10.9717 24.2344 8.76634 27.8871 8.76634 31.9688C8.76634 27.8871 6.56102 24.2344 3.4487 24.2344C6.56102 24.2344 8.76634 20.5827 8.76634 16.5Z" />
+        <path d="M6.34838 1.03125C6.34838 5.11345 8.5537 8.76562 11.666 8.76562C8.55422 8.76562 6.34838 12.4183 6.34838 16.5C6.34838 12.4183 4.14305 8.76562 1.03074 8.76562C4.14305 8.76562 6.34838 5.11345 6.34838 1.03125Z" />
+      </svg>
+      Engly
+    </div>
+    <h1>Improve <span>your English</span> while you code with AI</h1>
+    <div class="foot">
+      <div class="cmd"><b>$</b> npm install -g engly</div>
+      <div class="tag">Open source · MIT</div>
+    </div>
+  </body>
+</html>

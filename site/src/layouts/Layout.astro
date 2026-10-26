@@ -16,7 +16,12 @@ interface Props {
 
 const { title, description } = Astro.props;
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
-const ogImage = `${Astro.site?.origin ?? ''}${base}/og.png`;
+const origin = Astro.site?.origin ?? '';
+const pageUrl = `${origin}${base}/`;
+const ogImage = `${origin}${base}/og.png`;
+const ogTitle = 'Engly — Improve your English while you code with AI';
+const ogDescription = 'One command. Every agent. Always on. Open source, MIT.';
+const ogImageAlt = 'Engly: improve your English while you code with AI. Install with npm install -g engly.';
 const gaId = import.meta.env.PUBLIC_GA_ID;
 const gtagSetup = `window.dataLayer = window.dataLayer || [];
 function gtag() {
@@ -33,16 +38,23 @@ gtag('config', '${gaId}');`;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta property="og:title" content="Engly — Improve your English while you code with AI" />
-    <meta property="og:description" content="One command. Every agent. Always on. Open source, MIT." />
+    <link rel="canonical" href={pageUrl} />
+    <meta property="og:site_name" content="Engly" />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://github.com/victorcastro/engly" />
+    <meta property="og:url" content={pageUrl} />
+    <meta property="og:title" content={ogTitle} />
+    <meta property="og:description" content={ogDescription} />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={ogTitle} />
+    <meta name="twitter:description" content={ogDescription} />
     <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="favicon.ico" sizes="32x32" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
