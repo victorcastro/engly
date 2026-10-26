@@ -10,7 +10,8 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "og": "node scripts/generate-og.mjs"
   },
   "dependencies": {
     "@fontsource-variable/geist": "^5.3.0",

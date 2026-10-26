@@ -7,5 +7,6 @@ export const opencode: Adapter = {
   delivery: 'embedded',
   detect: (cwd) => anyExists(cwd, ['opencode.json', 'opencode.jsonc', '.opencode']),
   instructionFile: () => 'AGENTS.md',
+  instructionFiles: ['AGENTS.md'],
   skillDirs: ['.agents/skills', '.claude/skills', '.opencode/skills'],
 };

@@ -23,14 +23,14 @@ You write prompts to an AI all day. Why not improve your English while you do it
 - **No API keys, no extra model.** The agent you already use does the coaching.
 - **For any level.** From A2 to C1, in any native language.
 
-Engly teaches the coding agent you already use (Claude Code, Codex, Cursor…) to coach your English. Every prompt becomes a tiny lesson: the agent shows you how to say it in clear English, points out a couple of mistakes, and then does the task as if you had written the better prompt.
+Engly teaches the coding agent you already use (Claude Code, Codex, OpenCode, Cursor…) to coach your English. Every prompt becomes a tiny lesson: the agent shows you how to say it in clear English, points out a couple of mistakes, and then does the task as if you had written the better prompt.
 
 No extra app, no extra model, no extra cost. Just better English and clearer prompts.
 
 ## 🚀 Quick start
 
 > [!NOTE]
-> Engly is in early development. Today it works for **Claude Code** and **Codex**. More agents and `engly config` are coming soon.
+> Engly is in early development. Today it works for **Claude Code**, **Codex** and **OpenCode**. More agents and `engly config` are coming soon.
 
 Install it with one command:
 
@@ -63,7 +63,7 @@ Open your agent as usual. Your next prompt will be coached. 🎉
 
 | Command | Description |
 |---|---|
-| `engly init` | Set up Engly in the project. Flags: `--tools claude,codex`, `--style light\|detailed`, `--no-apply` |
+| `engly init` | Set up Engly in the project. Flags: `--tools claude,codex,opencode`, `--style light\|detailed`, `--no-apply` |
 | `engly update` | Refresh skills and instructions to the installed version |
 | `engly enable` / `disable` | Turn the coach on or off for the project |
 | `engly status` | Show where Engly is installed and whether it is active |

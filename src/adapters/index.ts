@@ -11,7 +11,7 @@ export { TOOL_IDS } from './types.js';
 // Adding a new agent = adding its adapter here (spec §5).
 export const adapters: Record<ToolId, Adapter> = { claude, codex, opencode, cursor, copilot };
 
-export const IMPLEMENTED_TOOLS: readonly ToolId[] = ['claude', 'codex'];
+export const IMPLEMENTED_TOOLS: readonly ToolId[] = ['claude', 'codex', 'opencode'];
 
 export function skillTargets(tools: readonly ToolId[]): string[] {
   const chosen: string[] = [];
