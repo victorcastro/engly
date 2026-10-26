@@ -86,7 +86,7 @@ export const features: { title: string; body: string }[] = [
 export const agents: { name: string; file: string; available?: boolean }[] = [
   { name: 'Claude Code', file: 'CLAUDE.md', available: true },
   { name: 'Codex', file: 'AGENTS.md', available: true },
-  { name: 'OpenCode', file: 'AGENTS.md' },
+  { name: 'OpenCode', file: 'AGENTS.md', available: true },
   { name: 'Cursor', file: '.cursor/rules/engly.mdc' },
   { name: 'GitHub Copilot', file: '.github/copilot-instructions.md' },
 ];
@@ -100,7 +100,7 @@ export const faq: { question: string; answer: string }[] = [
   {
     question: 'Which agents does it work with?',
     answer:
-      'Claude Code and Codex today. Pick them in <code>engly init</code> or pass <code>--tools claude,codex</code>. OpenCode, Cursor and GitHub Copilot are coming soon.',
+      'Claude Code, Codex and OpenCode today. Pick them in <code>engly init</code> or pass <code>--tools claude,codex,opencode</code>. Cursor and GitHub Copilot are coming soon.',
   },
   { question: 'Will it slow me down?', answer: 'No. Feedback is a few lines and it never waits for confirmation.' },
   {

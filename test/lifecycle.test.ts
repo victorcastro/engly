@@ -430,6 +430,36 @@ describe('init', () => {
   });
 });
 
+describe('opencode', () => {
+  const block = async (file: string) => {
+    const text = await read(file);
+    return text.slice(text.indexOf('<!-- engly:start'), text.indexOf('<!-- engly:end -->'));
+  };
+
+  it('embeds the instructions in AGENTS.md and installs the skills in .agents/skills', async () => {
+    await write('AGENTS.md', USER_TEXT);
+    await install({ tools: 'opencode' });
+
+    const text = await read('AGENTS.md');
+    expect(text.startsWith(USER_TEXT)).toBe(true);
+    expect(await block('AGENTS.md')).toContain('Engly – English coach');
+    expect(text).not.toContain('@.engly/engly.md');
+    expect(await exists('.agents/skills/engly-on/SKILL.md')).toBe(true);
+    expect(await exists('.claude')).toBe(false);
+    expect(await exists('CLAUDE.md')).toBe(false);
+  });
+
+  it('imports in CLAUDE.md and embeds in AGENTS.md when both agents have their own file', async () => {
+    await write('CLAUDE.md', USER_TEXT);
+    await install({ tools: 'claude,opencode' });
+
+    expect(await block('CLAUDE.md')).toContain('@.engly/engly.md');
+    expect(await block('AGENTS.md')).toContain('Engly – English coach');
+    expect(await exists('.claude/skills/engly-on/SKILL.md')).toBe(true);
+    expect(await exists('.agents')).toBe(false);
+  });
+});
+
 describe('codex', () => {
   const block = async (file: string) => {
     const text = await read(file);

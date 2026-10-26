@@ -108,8 +108,13 @@ describe('candidateFiles', () => {
     expect(await candidateFiles(root, ['codex'])).toEqual(['AGENTS.md']);
   });
 
+  it('lists AGENTS.md once for Codex and OpenCode', async () => {
+    expect(await candidateFiles(root, ['codex', 'opencode'])).toEqual(['AGENTS.md']);
+    expect(await candidateFiles(root, ['opencode'])).toEqual(['AGENTS.md']);
+  });
+
   it('ignores tools that are not implemented yet', async () => {
-    expect(await candidateFiles(root, ['opencode', 'cursor'])).toEqual([]);
+    expect(await candidateFiles(root, ['cursor', 'copilot'])).toEqual([]);
   });
 });
 
@@ -156,7 +161,7 @@ describe('configuredTools', () => {
   });
 
   it('falls back to the implemented tools without a config or tools', () => {
-    expect(configuredTools(null)).toEqual(['claude', 'codex']);
-    expect(configuredTools({ ...defaultConfig('1.0.0'), tools: ['cursor'] })).toEqual(['claude', 'codex']);
+    expect(configuredTools(null)).toEqual(['claude', 'codex', 'opencode']);
+    expect(configuredTools({ ...defaultConfig('1.0.0'), tools: ['cursor'] })).toEqual(['claude', 'codex', 'opencode']);
   });
 });

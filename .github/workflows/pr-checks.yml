@@ -71,6 +71,18 @@ jobs:
           ! grep -q '@.engly/engly.md' AGENTS.md
           node "$cli" remove --yes
           test ! -e .agents
+      - name: Smoke test engly init for OpenCode
+        run: |
+          cli="$PWD/dist/cli.js"
+          project="$(mktemp -d)"
+          cd "$project"
+          node "$cli" init --tools opencode
+          test -f .agents/skills/engly-review/SKILL.md
+          test ! -e CLAUDE.md
+          grep -q 'Engly – English coach' AGENTS.md
+          ! grep -q '@.engly/engly.md' AGENTS.md
+          node "$cli" remove --yes
+          test ! -e .agents
       - name: Smoke test the other commands
         run: |
           cli="$PWD/dist/cli.js"
