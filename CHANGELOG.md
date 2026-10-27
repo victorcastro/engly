@@ -5,6 +5,12 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.9.1] - 2026-10-27
+
+### Changed
+
+- Landing page analytics are now fully manual. The automatic `page_view` of gtag.js is disabled (`send_page_view: false`), so only the explicit events (`copy_command`, `cta_click`, `link_click`, `nav_click`, `section_view`, `demo_tab_select`, `faq_toggle`, `theme_toggle` and `terminal_replay`) are sent, which makes them usable as funnel steps in Google Analytics.
+
 ## [1.9.0] - 2026-10-26
 
 ### Added
